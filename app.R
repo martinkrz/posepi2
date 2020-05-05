@@ -57,11 +57,11 @@ R0_step              = 0.1
 lp_max               = 28
 lp_default           = 7
 lp_min               = 1
-# Immunity duration max and default. Slider step is 1.
+# Immunity duration max and default. Slider step is 0.1. Units are years.
 id_max               = 10
 id_default           = 2
 id_step              = 0.1
-# Life expectancy max and default. Slider step is 1. Units are years
+# Life expectancy max and default. Slider step is 1. Units are years.
 le_max               = 100
 le_default           = 76
 # do timings
