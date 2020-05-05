@@ -1,6 +1,8 @@
+## WORK IN PROGRESS (4 May 2020)
+
 #### SUPPLEMENTARY MATERIALS
 
-# Points of Significance: Modeling infectious epidemics
+# Points of Significance: Adding realism to the SIR model for infectious disease epidemics
 
 ##### Ottar Bjørnstad<sup>1,2</sup>, Katriona Shea<sup>1</sup>, Martin Krzywinski<sup>3*</sup>, Naomi Altman<sup>4</sup>
 
@@ -11,7 +13,9 @@
 
 [Interactive figures](https://shiny.bcgsc.ca/posepi2/) accompanying the column.
 
+<!---
 ![Points of Significance: Modeling infectious epidemics](https://github.com/martinkrz/posepi2/blob/master/www/img/screenshot.png)
+-->
 
 ## Getting Started
 
