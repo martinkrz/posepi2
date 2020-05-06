@@ -1,11 +1,11 @@
 ui = fluidPage( theme=("css/style.css"),
                 htmlOutput("masthead"),
-                navbarPage("Modelling Infectious Epidemics",id="tabs",
+                navbarPage("Adding realism to the SIR model for infectious disease epidemics",id="tabs",
                            
                            tabPanel("The SEIRS model",value=1,id=1,
                                     sidebarLayout(
                                       sidebarPanel(
-                                        sliderInput("ip1", HTML("Infectious period, <i>ip</i> (days)"), 
+                                        sliderInput("ip1", HTML("Infectious period, 1/<i>&gamma;</i> (days)"), 
                                                     value = ip_default,
                                                     min = 1, max = ip_max, step = 1),
                                         sliderInput("R01", HTML("<i>R</i><sub>0</sub>"), value = 3,
@@ -19,16 +19,21 @@ ui = fluidPage( theme=("css/style.css"),
                                         sliderInput("le1", HTML("Life expectancy, 1/<i>&mu;</i> (years)"),
                                                     value = le_default,
                                                     min = 1, max = le_max, step = 1),
-                                        sliderInput("vac", HTML("vaccination level, <i>p</i> (%)"), 0,
+                                        sliderInput("p1", HTML("vaccination level, <i>p</i> (%)"), 0,
                                                     min = 0, max = 99, step = 1),
-                                        checkboxInput("log1", HTML("log y-axis scale"), FALSE)
+                                        checkboxInput("log1", HTML("log axes"), FALSE)
                                       ),
                                       mainPanel(h3("The SEIRS model of infection spread"),
                                                 div(htmlOutput("text1"),class="copy"),
                                                 div(
                                                 div(htmlOutput("title1a"),class="title"),
-                                                div(plotOutput("plot1"),class="plot"),
-                                                div(htmlOutput("caption1"),class="caption"),
+                                                div(plotOutput("plot1a"),class="plot"),
+                                                div(htmlOutput("caption1a"),class="caption"),
+                                                class="plotbox"),
+                                                div(
+                                                div(htmlOutput("title1b"),class="title"),
+                                                div(plotOutput("plot1b"),class="plot"),
+                                                div(htmlOutput("caption1b"),class="caption"),
                                                 class="plotbox")
                                       )
                                     )),
@@ -122,31 +127,65 @@ ui = fluidPage( theme=("css/style.css"),
                                       helpText("Exposed $$\\frac{dE}{dt} = \\frac{\\beta I S}{N} - \\sigma E$$"),
                                       helpText("Infectious $$\\frac{dI}{dt} = \\sigma E - \\gamma I$$"),
                                       helpText("Recovered $$\\frac{dR}{dt} = \\gamma I - (\\omega + \\mu)R$$"),
-                                      helpText("Recovery rate (can we say this?) $$\\gamma = \\frac{1}{\\text{infectious period}}$$"),
+                                      helpText("Parameters (mean values)$$
+\\begin{align*}
+
+
+                                               \\textrm{contact rate} &= \\beta
+                                               
+                                               \\\\
+                                               
+
+                                               \\textrm{latency period} &= 1/\\sigma
+                                               
+                                               \\\\
+                                               
+                                               \\textrm{recovery period} &= 1/\\gamma
+                                               
+                                               \\\\
+                                               
+                                               \\textrm{immunity duration} &= 1/\\omega
+                                               
+                                               \\\\
+                                               
+                                               \\textrm{life expectancy} &= 1/\\mu
+                                               
+                                               \\end{align*}
+                                               
+                                               $$"),
                                       helpText("Basic reproduction number $$R_0 =  \\frac{\\sigma}{\\sigma +\\mu} \\frac{\\beta}{\\gamma+\\mu}$$"),
-                                      helpText("Equilibrium infected fraction $$I^* = \\frac{1-\\frac{1}{R_0}}{\\mu+\\gamma-\\frac{\\omega\\gamma}{\\omega+\\mu}}$$"),
+                                      helpText("Endemic equilibrium $$
+\\begin{align*}
+
+                                               S(\\infty) &= 1/R_0
+                                               
+                                               \\\\
+                                               
+                                               E(\\infty) &= \\frac{(\\mu+\\gamma)I(\\infty)}{\\sigma}
+                                               
+                                               \\\\
+                                               
+                                               I(\\infty) &= \\frac{\\mu (1-S(\\infty))}{\\beta S(\\infty) -\\frac{\\omega\\gamma}{\\omega+\\mu}}
+                                               
+                                               \\\\
+                                               
+                                               R(\\infty) &= \\frac{\\gamma I(\\infty)}{\\omega + \\mu}
+                                               
+                                               \\end{align*}$$"),
+                                               
                                       helpText("Inter-epidemic period $$T \\approx 4 \\pi \\sqrt{4 \\frac{R_0 -1}{G_I G_R} - \\left(\\frac{1}{G_R}-\\frac{1}{A}\\right)^2}$$"),
                                       helpText("Endemic mean age of infection $$A = \\frac{\\omega+\\mu+\\gamma}{(\\omega+\\mu)(\\beta-\\gamma-\\mu)}$$"),
-                                      helpText("Mean infectious period $$G_I$$"),
-                                      helpText("Mean duration of immunity $$G_R$$"),
+                                      helpText("Mean infectious period $$G_I = 1/\\gamma$$"),
+                                      helpText("Mean duration of immunity $$G_R = 1/\\omega$$"),
                                       helpText("Age-dependent model $$\\begin{align*}
-
                                                \\frac{dS_1}{dt} &= \\underbrace{\\mu N}_\\textrm{birth} - \\underbrace{\\phi_1 S_1}_\\textrm{infection} - \\underbrace{\\nu_1 S_1}_\\textrm{vaccination} - \\underbrace{a_1 S_1}_\\text{aging} - \\underbrace{ \\mu S_1 }_\\text{death} 
-                                               
                                                \\\\
-                                               
                                                \\frac{dS_k}{dt} &= \\underbrace{a_{k-1}S_{k-1}}_\\text{aging in} - \\phi_k S_k -\\nu_k S_k - \\underbrace{a_k S_k}_\\text{aging out} - \\mu S_k
-                                               
                                                \\\\ 
-                                               
                                                \\frac{dI_k}{dt} &= a_{k-1}I_{k-1} + \\phi_k S_k - \\underbrace{\\gamma I_k}_\\text{recovery} - a_k I_k - \\mu I_k
-                                               
                                                \\\\
-                                               
                                                \\frac{dR_k}{dt} &= a_{k-1}R_{k-1} + \\gamma I_k + \\nu_k S_k - \\mu I_R
-                                               
                                                \\\\
-                                               
                                                \\phi_k &= \\sum_{j=1}^A \\frac{\\beta W_{ij} I_j}{N}
                                                \\end{align*}$$")
                                     ),
@@ -162,8 +201,8 @@ ui = fluidPage( theme=("css/style.css"),
                            
                            tabPanel("Download & Credits",value=3,id=3,
                                     mainPanel(
-                                      h3("Points of Significance: Modelling Infectious Epidemics"),
-                                      p(HTML("Ottar Bjornstad<sup>1,2</sup>, Katriona Shea<sup>1</sup>, Martin Krzywinski<sup>3*</sup>, Naomi Altman<sup>4</sup>")),
+                                      h3("Points of Significance: Adding realism to the SIR model for infectious disease epidemics"),
+                                      p(HTML("Ottar Bjørnstad<sup>1,2</sup>, Katriona Shea<sup>1</sup>, Martin Krzywinski<sup>3*</sup>, Naomi Altman<sup>4</sup>")),
                                       div(
                                       p("1. Department of Biology, The Pennsylvania State University, State College, PA, USA."),
                                       p("2. Department of Entomology, The Pennsylvania State University, State College, PA, USA."),
@@ -178,12 +217,14 @@ ui = fluidPage( theme=("css/style.css"),
                                       
                                       hr(),
                                       h4("Citation"),
-                                      p(HTML("Bjornstad, O., Shea, K., Krzywinski, M. & Altman, N. Points of Significance: Modelling Infectious Epidemics (2020) <i>Nature Methods</i> <b>17</b> (in press).")),
+                                      p(HTML("Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. Points of Significance: Adding realism to the SIR model for infectious disease epidemics. (2020) <i>Nature Methods</i> <b>17</b> (in press).")),
                                       
                                       hr(),
                                       h4("Version history"),
                                       h5("22 April 2020"),
                                       p("Starting work."),
+                                      h5("5 May 2020"),
+                                      p("Refactored."),
                                       width=16
                                       
                                     ))

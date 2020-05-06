@@ -6,8 +6,8 @@ calculate1 = function(R0,ip,lp,id,le,vac) {
   omega = 1/(id*365)
   mu    = 1/(le*365)
   beta  = beta(R0,gamma,sigma,mu,model="seirs")
-  tmax  = seirs_t_bound(beta,gamma,sigma,omega,mu,vac)
-  out   = seirs(R0=R0, gamma=gamma, sigma=sigma, omega=omega, mu=mu, vac=vac, tmax=tmax, step=tmax/sir_system_steps)
+  tmax  = seirs_t_bound(R0,gamma,sigma,omega,mu,vac)
+  out   = seirs(R0=R0, gamma=gamma, sigma=sigma, omega=omega, mu=mu, vac=vac, tmax=tmax,steps=sir_system_steps)
   return(out)
 }
 

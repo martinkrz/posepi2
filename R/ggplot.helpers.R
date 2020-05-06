@@ -51,8 +51,8 @@ plot_theme = function(p) {
 
 my.plot_legend = list(
   scale_colour_manual("GROUP", 
-                      breaks = c("S", "E", "I", "R","C"),
-                      labels = c("susceptible","exposed", "infected","recovered","capacity"),
+                      breaks = c("S", "E", "I", "R","C1","C2"),
+                      labels = c("susceptible","exposed","infected","recovered","I vs S (SEIRS)","I vs S (SIR)"),
                       values = palette)
 )  
 
@@ -70,19 +70,71 @@ axis_spacing = function(min=0,max=1,default=0.2) {
   }
   return(spacing)
 }
-my.plot_axis = function(xlab="days",ylab="percent of population (%)",xmin=NULL,xmax=NULL,ymin=0,ymax=1,log10=0,plotn=1) {
-  ymin = max(0,floorToFraction(ymin,0.05))
-  ymax = min(1,ceilToFraction(ymax,0.05))
-  by   = axis_spacing(ymin,ymax)
-  opt  = list(scale_x_continuous(xlab,lim=c(xmin,xmax),sec.axis =sec_axis( ~ . / 365,name="years")))
-  if(log10) {
-    if(plotn==1) {
-      ymin = 0.0001
-      br   = c(0.0001,0.00025,0.001,0.0025,0.005,0.01,0.025,0.05,0.1,0.25,0.5,1)
-      opt  = append(opt,scale_y_log10(ylab,lim=c(ymin,ymax),breaks=br,labels=label_to_percent))
+
+my.plot_axis = function(xlab="days",
+                        ylab="percent of population (%)",
+                        xmin    = NULL, xmax  = NULL,
+                        ymin    = NULL, ymax  = NULL,
+                        log10   = 0,    
+                        dlog10  = 0,
+                        ysec     = 1,
+                        ypercent = 1,
+                        xpercent = 0) {
+  xlim = ! is.null(xmin) & ! is.null(xmax)
+  ylim = ! is.null(ymin) & ! is.null(ymax)
+  #cat(paste(xlim,ylim))
+  if(ylim) {
+    by   = axis_spacing(ymin,ymax)
+  } else {
+    
+  }
+  opt  = list()
+  if(xpercent) {
+    xfun = label_to_percent
+  } else {
+    xfun = label_to_identity
+  }
+  if(ypercent) {
+    yfun = label_to_percent
+  } else {
+    yfun = label_to_identity
+  }
+  # secondary x axis
+  if(ysec) {
+    if(xlim) {
+      opt = append(opt,scale_x_continuous(xlab,lim=c(xmin,xmax),labels=xfun,sec.axis=sec_axis( ~ . / 365,name="years")))
+    } else {
+      opt = append(opt,scale_x_continuous(xlab,labels=xfun,sec.axis=sec_axis( ~ . / 365,name="years")))
     }
   } else {
-    opt = append(opt,scale_y_continuous(ylab,lim=c(ymin,ymax),breaks=seq(ymin,ymax,by=by),labels=label_to_percent))
+    if(xlim) {
+      opt = append(opt,scale_x_continuous(xlab,lim=c(xmin,xmax),labels=xfun))
+    } else {
+      opt = append(opt,scale_x_continuous(xlab,labels=xfun))
+    }
+  }
+  # log or double log axis
+  if(log10 | dlog10) {
+      br   = c(0.0001,0.00025,0.001,0.0025,0.005,0.01,0.025,0.05,0.1,0.25,0.5,1)
+      if(ylim) {
+        opt  = append(opt,scale_y_log10(ylab,lim=c(ymin,ymax),breaks=br,labels=yfun))
+      } else {
+        opt  = append(opt,scale_y_log10(ylab,lim=c(sir_init_i,NA),breaks=br,labels=yfun))
+      }
+      if(dlog10) {
+        br   = c(0.0001,0.00025,0.001,0.0025,0.005,0.01,0.025,0.05,0.1,0.25,0.5,1)
+        if(xlim) {
+          opt  = append(opt,scale_x_log10(xlab,lim=c(xmin,xmax),breaks=br,labels=xfun))
+        } else {
+          opt  = append(opt,scale_x_log10(xlab,breaks=br,labels=xfun))
+        }
+      }
+  } else {
+    if(ylim) {
+      opt = append(opt,scale_y_continuous(ylab,lim=c(ymin,ymax),breaks=seq(ymin,ymax,by=by),labels=yfun))
+    } else {
+      opt = append(opt,scale_y_continuous(ylab,labels=yfun))
+    }
   }
   return(opt)
 }

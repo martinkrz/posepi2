@@ -27,6 +27,7 @@ require(deSolve)
 require(ggplot2)
 library(grid)
 library(stringr)
+library(tidyverse)
 #
 # 2. Getting started
 #
@@ -38,8 +39,8 @@ library(stringr)
 # 04-05-2020   working on it
 
 # CUSTOM SETTINGS
-# The colors of the suscetible (S), infected  (I) and recovered (R) trajectories. 
-palette              = c(S="#333333",E="#22b573",I="#f15a24",R="#29abe2",G="#8cc63f",C="#333333")
+# The colors of the SEIR groups and some greys (Cn)
+palette              = c(S="#333333",E="#a0d848",I="#f15a24",R="#29abe2",G="#8cc63f",C1="#333333",C2="#cccccc")
 # Plot height and line width for trajectories
 plot_line_width      = 1.5
 plot_text_size       = 12
@@ -59,20 +60,13 @@ lp_default           = 7
 lp_min               = 1
 # Immunity duration max and default. Slider step is 0.1. Units are years.
 id_max               = 10
-id_default           = 2
+id_default           = 1
 id_step              = 0.1
 # Life expectancy max and default. Slider step is 1. Units are years.
 le_max               = 100
 le_default           = 76
 # do timings
 do_timing            = FALSE
-
-my.plot_legend = list(
-  scale_colour_manual("GROUP", 
-                      breaks = c("S", "E", "I", "R","C"),
-                      labels = c("susceptible","exposed","infected","recovered","capacity"),
-                      values = palette)
-)  
 
 source("R/format.helpers.R",local=T)
 source("R/ggplot.helpers.R",local=T)

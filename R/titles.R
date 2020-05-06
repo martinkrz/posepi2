@@ -1,15 +1,28 @@
 # This is messy but I don't know how else to do it.
+
 output$title1a = renderPrint({
   index = p1()[[2]][[1]]
   title = p1()[[3]][[1]]
   cat(titlefmt(index,title))
 })
-output$plot1 = renderPlot({
+output$plot1a = renderPlot({
   p1()[[1]][[1]]
 })
-output$caption1 = renderPrint({ 
+output$caption1a = renderPrint({ 
   cat(paste("<p>",p1()[[4]][[1]],"</p>",sep=""))
 })
+output$title1b = renderPrint({
+  index = p1()[[2]][[2]]
+  title = p1()[[3]][[2]]
+  cat(titlefmt(index,title))
+})
+output$plot1b = renderPlot({
+  p1()[[1]][[2]]
+})
+output$caption1b = renderPrint({ 
+  cat(paste("<p>",p1()[[4]][[2]],"</p>",sep=""))
+})
+
 output$title2a <- renderPrint({
   index = p2()[[2]][[1]]
   title = p2()[[3]][[1]]
