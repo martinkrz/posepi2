@@ -8,6 +8,9 @@ eq_seirs = read_latex("latex/seirs.tex")
 eq_equil = read_latex("latex/seirs.equilibrium.tex")
 eq_param = read_latex("latex/seirs.parameters.tex")
 eq_age   = read_latex("latex/seirs.age-dependent.tex")
+eq_r0    = read_latex("latex/seirs.r0.tex")
+eq_period= read_latex("latex/seirs.period.tex")
+eq_endemic_age= read_latex("latex/seirs.endemic-age.tex")
 
 ui = fluidPage( theme=("css/style.css"),
                 htmlOutput("masthead"),
@@ -136,11 +139,10 @@ ui = fluidPage( theme=("css/style.css"),
                                     withMathJax(
                                       helpText(paste("SEIRS system $$",eq_seirs,"$$")),
                                       helpText(paste("Parameters (mean values) $$",eq_param,"$$")),
-                                      helpText("Basic reproduction number $$R_0 =  \\frac{\\sigma}{\\sigma +\\mu} \\frac{\\beta}{\\gamma+\\mu+\\alpha}$$"),
+                                      helpText("Basic reproduction number $$",eq_r0,"$$"),
                                       helpText(paste("Endemic equilibrium $$",eq_equil,"$$")),
-
-                                      helpText("Inter-epidemic period $$T \\approx 4 \\pi \\sqrt{4 \\frac{R_0 -1}{G_I G_R} - \\left(\\frac{1}{G_R}-\\frac{1}{A}\\right)^2}$$"),
-                                      helpText("Endemic mean age of infection $$A = \\frac{\\omega+\\mu+\\gamma}{(\\omega+\\mu)(\\beta-\\gamma-\\mu)}$$"),
+                                      helpText("Inter-epidemic period $$",eq_period,"$$"),
+                                      helpText("Endemic mean age of infection $$",eq_endemic_age,"$$"),
                                       helpText("Mean infectious period $$G_I = 1/\\gamma$$"),
                                       helpText("Mean duration of immunity $$G_R = 1/\\omega$$")
                                       #,helpText(paste("Age-dependent model $$",eq_age,"$$"))

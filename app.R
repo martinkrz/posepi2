@@ -36,7 +36,8 @@ library(tidyverse)
 # CHANGELOG
 #
 # 22-04-2020   spawned from posepi1
-# 04-05-2020   working on it
+# 04-05-2020   refactored plots and text into separate files
+# 06-05-2020   refactored LaTeX
 
 # CUSTOM SETTINGS
 # The colors of the SEIR groups and some greys (Cn)
