@@ -1,0 +1,17 @@
+\begin{align*}
+
+\frac{dS}{dt} &= \underbrace{(1-p)\mu N}_\textrm{unvaccinated birth} - \underbrace{\beta S I / N}_\textrm{infection} + \underbrace{\omega R}_\textrm{lost immunity} - \underbrace{ \mu S}_\text{death} 
+
+\\
+
+\frac{dE}{dt} &=  \underbrace{\beta S I / N}_\textrm{infection} - \underbrace{\sigma E}_\textrm{latency} - \underbrace{\mu E}_\text{death}
+
+\\
+
+\frac{dI}{dt} &=  \underbrace{\sigma E}_\textrm{latency} - \underbrace{\gamma I}_\text{recovery} - \underbrace{(\mu + \alpha)I}_\text{death}
+
+\\
+
+\frac{dR}{dt} &= \underbrace{p \mu N}_\textrm{vaccinated birth} + \underbrace{\gamma I}_\textrm{recovery} - \underbrace{\omega R}_\textrm{lost immunity}  - \underbrace{\mu R}_\textrm{death}
+
+\end{align*}

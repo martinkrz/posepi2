@@ -52,7 +52,7 @@ output$text1 = renderPrint({
                                                      #"Sinf",varfmt(value=smax,prec=1,percent=1)
   )))
   
-  cat(paste("<p>These interactive figures show how the SEIRS model of infection spread (see Equations tab) changes with varying parameters, such infectious period ",varfmt("1/gamma,"),"basic reproduction number",varfmt("R0,"),"latent period",varfmt("1/sigma"),"immunity duration",varfmt("1/omega"),"life expectancy",varfmt("1/mu"),"and vaccination level",varfmt("p."),sep=" "))
+  cat(paste("<p>These interactive figures show how the SEIRS model of infection spread (see Equations tab) changes with varying parameters, such infectious period ",varfmt("1/gamma,"),"basic reproduction number",varfmt("R0,"),"latent period",varfmt("1/sigma,"),"immunity duration",varfmt("1/omega,"),"life expectancy",varfmt("1/mu"),"and vaccination level",varfmt("p."),sep=" "))
   cat(paste("<p>Figure 1 shows the trajectories of each of the groups in the model (susceptible, exposed, infected, recovered) for the model parameters shown in the table on the right. The endemic equilibrium values are traces at",varfmt("t = inf,"),"such as the infected fraction at endemic equilibrium",varfmt("Iinf."),"The endemic mean age of infection is",varfmt("A"),"and the inter-epidemic interval (the period of the epidemic waves) is",varfmt("T."),sep=" "))
   
   tmp   = df[df$I >= max(df$I)/2,]$time

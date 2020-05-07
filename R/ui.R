@@ -1,3 +1,14 @@
+read_latex = function(file) {
+  str = readChar(file, file.info(file)$size)
+  #str = str_replace_all(str,"/","//")
+  return(str)
+}
+
+eq_seirs = read_latex("latex/seirs.tex")
+eq_equil = read_latex("latex/seirs.equilibrium.tex")
+eq_param = read_latex("latex/seirs.parameters.tex")
+eq_age   = read_latex("latex/seirs.age-dependent.tex")
+
 ui = fluidPage( theme=("css/style.css"),
                 htmlOutput("masthead"),
                 navbarPage("Adding realism to the SIR model for infectious disease epidemics",id="tabs",
@@ -123,72 +134,16 @@ ui = fluidPage( theme=("css/style.css"),
                            
                            tabPanel("Equations",value=2,id=2,
                                     withMathJax(
-                                      helpText("Susceptible $$\\frac{dS}{dt} = \\mu (N - S) - \\frac{\\beta I S}{N} + \\omega R$$"),
-                                      helpText("Exposed $$\\frac{dE}{dt} = \\frac{\\beta I S}{N} - \\sigma E$$"),
-                                      helpText("Infectious $$\\frac{dI}{dt} = \\sigma E - \\gamma I$$"),
-                                      helpText("Recovered $$\\frac{dR}{dt} = \\gamma I - (\\omega + \\mu)R$$"),
-                                      helpText("Parameters (mean values)$$
-\\begin{align*}
+                                      helpText(paste("SEIRS system $$",eq_seirs,"$$")),
+                                      helpText(paste("Parameters (mean values) $$",eq_param,"$$")),
+                                      helpText("Basic reproduction number $$R_0 =  \\frac{\\sigma}{\\sigma +\\mu} \\frac{\\beta}{\\gamma+\\mu+\\alpha}$$"),
+                                      helpText(paste("Endemic equilibrium $$",eq_equil,"$$")),
 
-
-                                               \\textrm{contact rate} &= \\beta
-                                               
-                                               \\\\
-                                               
-
-                                               \\textrm{latency period} &= 1/\\sigma
-                                               
-                                               \\\\
-                                               
-                                               \\textrm{recovery period} &= 1/\\gamma
-                                               
-                                               \\\\
-                                               
-                                               \\textrm{immunity duration} &= 1/\\omega
-                                               
-                                               \\\\
-                                               
-                                               \\textrm{life expectancy} &= 1/\\mu
-                                               
-                                               \\end{align*}
-                                               
-                                               $$"),
-                                      helpText("Basic reproduction number $$R_0 =  \\frac{\\sigma}{\\sigma +\\mu} \\frac{\\beta}{\\gamma+\\mu}$$"),
-                                      helpText("Endemic equilibrium $$
-\\begin{align*}
-
-                                               S(\\infty) &= 1/R_0
-                                               
-                                               \\\\
-                                               
-                                               E(\\infty) &= \\frac{(\\mu+\\gamma)I(\\infty)}{\\sigma}
-                                               
-                                               \\\\
-                                               
-                                               I(\\infty) &= \\frac{\\mu (1-S(\\infty))}{\\beta S(\\infty) -\\frac{\\omega\\gamma}{\\omega+\\mu}}
-                                               
-                                               \\\\
-                                               
-                                               R(\\infty) &= \\frac{\\gamma I(\\infty)}{\\omega + \\mu}
-                                               
-                                               \\end{align*}$$"),
-                                               
                                       helpText("Inter-epidemic period $$T \\approx 4 \\pi \\sqrt{4 \\frac{R_0 -1}{G_I G_R} - \\left(\\frac{1}{G_R}-\\frac{1}{A}\\right)^2}$$"),
                                       helpText("Endemic mean age of infection $$A = \\frac{\\omega+\\mu+\\gamma}{(\\omega+\\mu)(\\beta-\\gamma-\\mu)}$$"),
                                       helpText("Mean infectious period $$G_I = 1/\\gamma$$"),
                                       helpText("Mean duration of immunity $$G_R = 1/\\omega$$")
-                                      
-                                      #helpText("Age-dependent model $$\\begin{align*}
-                                      #         \\frac{dS_1}{dt} &= \\underbrace{\\mu N}_\\textrm{birth} - \\underbrace{\\phi_1 S_1}_\\textrm{infection} - \\underbrace{\\nu_1 S_1}_\\textrm{vaccination} - \\underbrace{a_1 S_1}_\\text{aging} - \\underbrace{ \\mu S_1 }_\\text{death} 
-                                      #         \\\\
-                                      #         \\frac{dS_k}{dt} &= \\underbrace{a_{k-1}S_{k-1}}_\\text{aging in} - \\phi_k S_k -\\nu_k S_k - \\underbrace{a_k S_k}_\\text{aging out} - \\mu S_k
-                                      #         \\\\ 
-                                      #         \\frac{dI_k}{dt} &= a_{k-1}I_{k-1} + \\phi_k S_k - \\underbrace{\\gamma I_k}_\\text{recovery} - a_k I_k - \\mu I_k
-                                      #         \\\\
-                                      #         \\frac{dR_k}{dt} &= a_{k-1}R_{k-1} + \\gamma I_k + \\nu_k S_k - \\mu I_R
-                                      #         \\\\
-                                      #         \\phi_k &= \\sum_{j=1}^A \\frac{\\beta W_{ij} I_j}{N}
-                                      #         \\end{align*}$$")
+                                      #,helpText(paste("Age-dependent model $$",eq_age,"$$"))
                                     ),
                                     
                                     p(paste("Infection trajectories show a numerical solution to the SEIRS equations with",formatC(sir_system_steps,format="f",big.mark=",",digits=0),"time steps and initial parameters",sep=" ")),

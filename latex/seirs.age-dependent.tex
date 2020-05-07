@@ -1,0 +1,21 @@
+\begin{align*}
+
+\frac{dS_1}{dt} &= \underbrace{\mu N}_\textrm{birth} - \underbrace{\phi_1 S_1}_\textrm{infection} - \underbrace{\nu_1 S_1}_\textrm{vaccination} - \underbrace{a_1 S_1}_\text{aging} - \underbrace{ \mu S_1 }_\text{death} 
+
+\\
+
+\frac{dS_k}{dt} &= \underbrace{a_{k-1}S_{k-1}}_\text{aging in} - \phi_k S_k -\nu_k S_k - \underbrace{a_k S_k}_\text{aging out} - \mu S_k
+
+\\ 
+
+\frac{dI_k}{dt} &= a_{k-1}I_{k-1} + \phi_k S_k - \underbrace{\gamma I_k}_\text{recovery} - a_k I_k - \mu I_k
+
+\\
+
+\frac{dR_k}{dt} &= a_{k-1}R_{k-1} + \gamma I_k + \nu_k S_k - \mu I_R
+
+\\
+
+\phi_k &= \sum_{j=1}^A \frac{\beta W_{ij} I_j}{N}
+
+\end{align*}
