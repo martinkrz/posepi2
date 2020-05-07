@@ -55,4 +55,4 @@ Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. Points of Significance: Ad
 
 ## License
 
-This proejct is licensed under the [https://creativecommons.org/licenses/by-nc/4.0/](Creative Commons Attribution-NonCommercial 4.0 International Public License) - see the [LICENSE](LICENSE) file for details.
+This proejct is licensed under the [Creative Commons Attribution-NonCommercial 4.0 International Public License]([https://creativecommons.org/licenses/by-nc/4.0/). See the [LICENSE](LICENSE) file for details.
