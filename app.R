@@ -1,5 +1,5 @@
 # Points of Significance - Adding realism to the SIR model for infectious disease epidemics
-# Ottar Bjøornstad (1,2), Katriona Shea (1), Martin Krzywinski (3*), Naomi Altman (4)
+# Ottar Bjørnstad (1,2), Katriona Shea (1), Martin Krzywinski (3*), Naomi Altman (4)
 #
 # 1. Department of Biology, The Pennsylvania State University, State College, PA, USA.
 # 2. Department of Entomology, The Pennsylvania State University, State College, PA, USA.
@@ -8,8 +8,8 @@
 # * martink@bcgsc.ca
 #
 # CITATION
-# Bjornstad, O., Shea, K., Krzywinski, M. & Altman, N. 
-# Points of Significance: Adding realism to the SIR model for infectious disease epidemics (2020) Nat Meth 17 (in press)
+# Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. 
+# Points of Significance: Adding realism to the SIR model for infectious disease epidemics (2020) Nature Methods 17 (in press).
 #
 # DOWNLOAD
 # https://github.com/martinkrz/posepi2

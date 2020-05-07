@@ -29,14 +29,15 @@ output$text1 = renderPrint({
   
   bgstr = sprintf(" (%s = %s%s = %.3f/day, %s = 1/%s = %.3f/day)",varfmt("beta"),varfmt("gamma"),varfmt("R0"),beta,tags$i("γ"),tags$i("ip"),gamma)
   
-  table(title="SEIRS parameters",rows=makerows(c("R0",varfmt(value=R0,prec=1),
-                                                     "p",varfmt(value=p,prec=0,percent=1),
-                                                     "1/beta",varfmt(value=1/beta,prec=1,units="days"),
-                                                     "1/gamma",varfmt(value=1/gamma,prec=0,units="days"),
-                                                     "1/sigma",varfmt(value=1/sigma,prec=0,units="days"),
-                                                     "1/omega",varfmt(value=1/(365*omega),prec=0,units="years"),
-                                                     "1/mu",varfmt(value=1/(365*mu),prec=0,units="years"),
-                                                     "pc",varfmt(value=1-1/R0,prec=0,percent=1),
+  table(title="SEIRS parameters",rows=makerows(c(    
+                                                     #"R0",varfmt(value=R0,prec=1),
+                                                     #"p",varfmt(value=p,prec=0,percent=1),
+                                                     #"1/beta",varfmt(value=1/beta,prec=1,units="days"),
+                                                     #"1/gamma",varfmt(value=1/gamma,prec=0,units="days"),
+                                                     #"1/sigma",varfmt(value=1/sigma,prec=0,units="days"),
+                                                     #"1/omega",varfmt(value=1/(365*omega),prec=0,units="years"),
+                                                     #"1/mu",varfmt(value=1/(365*mu),prec=0,units="years")
+                                                     "pcrit",varfmt(value=1-1/R0,prec=0,percent=1),
                                                      "A",varfmt(value=A,prec=1,units="years"),
                                                      "T",varfmt(value=period,prec=2,units="years"),
                                                      "Sinf",varfmt(value=stars$S,prec=1,percent=1),

@@ -35,7 +35,7 @@ varfmt = function(name=NULL,value=NULL,prec=1,percent=0,comma=0,units="") {
   # min,max subscripts
   name = str_replace_all(name, "(min|max)\\b", function(x){sprintf("<sub>%s</sub>",x)})
   # vaccination                         
-  name = str_replace_all(name, "pcrit", function(x){sprintf("<i>p</i><sub>c</sub>",str_remove(x,crit))})
+  name = str_replace_all(name, "pcrit", function(x){sprintf("<i>p</i><sub>c</sub>",str_remove(x,"crit"))})
   # time                         
   name = str_replace_all(name, "\\b(T|t|A)\\b", function(x){sprintf("<i>%s</i>",x)})
   # time                         

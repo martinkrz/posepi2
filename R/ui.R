@@ -176,19 +176,21 @@ ui = fluidPage( theme=("css/style.css"),
                                       helpText("Inter-epidemic period $$T \\approx 4 \\pi \\sqrt{4 \\frac{R_0 -1}{G_I G_R} - \\left(\\frac{1}{G_R}-\\frac{1}{A}\\right)^2}$$"),
                                       helpText("Endemic mean age of infection $$A = \\frac{\\omega+\\mu+\\gamma}{(\\omega+\\mu)(\\beta-\\gamma-\\mu)}$$"),
                                       helpText("Mean infectious period $$G_I = 1/\\gamma$$"),
-                                      helpText("Mean duration of immunity $$G_R = 1/\\omega$$"),
-                                      helpText("Age-dependent model $$\\begin{align*}
-                                               \\frac{dS_1}{dt} &= \\underbrace{\\mu N}_\\textrm{birth} - \\underbrace{\\phi_1 S_1}_\\textrm{infection} - \\underbrace{\\nu_1 S_1}_\\textrm{vaccination} - \\underbrace{a_1 S_1}_\\text{aging} - \\underbrace{ \\mu S_1 }_\\text{death} 
-                                               \\\\
-                                               \\frac{dS_k}{dt} &= \\underbrace{a_{k-1}S_{k-1}}_\\text{aging in} - \\phi_k S_k -\\nu_k S_k - \\underbrace{a_k S_k}_\\text{aging out} - \\mu S_k
-                                               \\\\ 
-                                               \\frac{dI_k}{dt} &= a_{k-1}I_{k-1} + \\phi_k S_k - \\underbrace{\\gamma I_k}_\\text{recovery} - a_k I_k - \\mu I_k
-                                               \\\\
-                                               \\frac{dR_k}{dt} &= a_{k-1}R_{k-1} + \\gamma I_k + \\nu_k S_k - \\mu I_R
-                                               \\\\
-                                               \\phi_k &= \\sum_{j=1}^A \\frac{\\beta W_{ij} I_j}{N}
-                                               \\end{align*}$$")
+                                      helpText("Mean duration of immunity $$G_R = 1/\\omega$$")
+                                      
+                                      #helpText("Age-dependent model $$\\begin{align*}
+                                      #         \\frac{dS_1}{dt} &= \\underbrace{\\mu N}_\\textrm{birth} - \\underbrace{\\phi_1 S_1}_\\textrm{infection} - \\underbrace{\\nu_1 S_1}_\\textrm{vaccination} - \\underbrace{a_1 S_1}_\\text{aging} - \\underbrace{ \\mu S_1 }_\\text{death} 
+                                      #         \\\\
+                                      #         \\frac{dS_k}{dt} &= \\underbrace{a_{k-1}S_{k-1}}_\\text{aging in} - \\phi_k S_k -\\nu_k S_k - \\underbrace{a_k S_k}_\\text{aging out} - \\mu S_k
+                                      #         \\\\ 
+                                      #         \\frac{dI_k}{dt} &= a_{k-1}I_{k-1} + \\phi_k S_k - \\underbrace{\\gamma I_k}_\\text{recovery} - a_k I_k - \\mu I_k
+                                      #         \\\\
+                                      #         \\frac{dR_k}{dt} &= a_{k-1}R_{k-1} + \\gamma I_k + \\nu_k S_k - \\mu I_R
+                                      #         \\\\
+                                      #         \\phi_k &= \\sum_{j=1}^A \\frac{\\beta W_{ij} I_j}{N}
+                                      #         \\end{align*}$$")
                                     ),
+                                    
                                     p(paste("Infection trajectories show a numerical solution to the SEIRS equations with",formatC(sir_system_steps,format="f",big.mark=",",digits=0),"time steps and initial parameters",sep=" ")),
                                     withMathJax(
                                       helpText("$$S(0) = 0.999 - p$$"),

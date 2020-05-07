@@ -14,7 +14,7 @@
 [Interactive figures](https://shiny.bcgsc.ca/posepi2/) accompanying the column.
 
 <!---
-![Points of Significance: Modeling infectious epidemics](https://github.com/martinkrz/posepi2/blob/master/www/img/screenshot.png)
+![Points of Significance: Modeling infectious epidemics](https://raw.githubusercontent.com/martinkrz/posepi1/master/www/img/screenshot.png)
 -->
 
 ## Getting Started
