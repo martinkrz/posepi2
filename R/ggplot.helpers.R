@@ -75,6 +75,7 @@ my.plot_axis = function(xlab="days",
                         ylab="percent of population (%)",
                         xmin    = NULL, xmax  = NULL,
                         ymin    = NULL, ymax  = NULL,
+                        ylog10min = NA,
                         log10   = 0,    
                         dlog10  = 0,
                         ysec     = 1,
@@ -119,7 +120,7 @@ my.plot_axis = function(xlab="days",
       if(ylim) {
         opt  = append(opt,scale_y_log10(ylab,lim=c(ymin,ymax),breaks=br,labels=yfun))
       } else {
-        opt  = append(opt,scale_y_log10(ylab,lim=c(sir_init_i,NA),breaks=br,labels=yfun))
+        opt  = append(opt,scale_y_log10(ylab,lim=c(ylog10min,NA),breaks=br,labels=yfun))
       }
       if(dlog10) {
         br   = c(0.0001,0.00025,0.001,0.0025,0.005,0.01,0.025,0.05,0.1,0.25,0.5,1)

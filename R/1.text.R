@@ -39,7 +39,7 @@ output$text1 = renderPrint({
                                                      #"1/mu",varfmt(value=1/(365*mu),prec=0,units="years")
                                                      "pcrit",varfmt(value=1-1/R0,prec=0,percent=1),
                                                      "A",varfmt(value=A,prec=1,units="years"),
-                                                     "T",varfmt(value=period,prec=2,units="years"),
+                                                     "T_E",varfmt(value=period,prec=2,units="years"),
                                                      "Sinf",varfmt(value=stars$S,prec=1,percent=1),
                                                      "Einf",varfmt(value=stars$E,prec=1,percent=1),
                                                      "Iinf",varfmt(value=stars$I,prec=1,percent=1),
@@ -53,7 +53,7 @@ output$text1 = renderPrint({
   )))
   
   cat(paste("<p>These interactive figures show how the SEIRS model of infection spread (see Equations tab) changes with varying parameters, such infectious period ",varfmt("1/gamma,"),"basic reproduction number",varfmt("R0,"),"latent period",varfmt("1/sigma,"),"immunity duration",varfmt("1/omega,"),"life expectancy",varfmt("1/mu"),"and vaccination level",varfmt("p."),sep=" "))
-  cat(paste("<p>Figure 1 shows the trajectories of each of the groups in the model (susceptible, exposed, infected, recovered) for the model parameters shown in the table on the right. The endemic equilibrium values are traces at",varfmt("t = inf,"),"such as the infected fraction at endemic equilibrium",varfmt("Iinf."),"The endemic mean age of infection is",varfmt("A"),"and the inter-epidemic interval (the period of the epidemic waves) is",varfmt("T."),sep=" "))
+  cat(paste("<p>Figure 1 shows the trajectories of each of the groups in the model (susceptible, exposed, infected, recovered) for the model parameters shown in the table on the right. The endemic equilibrium values are traces at",varfmt("t = inf,"),"such as the infected fraction at endemic equilibrium",varfmt("Iinf."),"The endemic mean age of infection is",varfmt("A"),"and the inter-epidemic interval (the period of the epidemic waves) is",varfmt("T_E."),sep=" "))
   
   tmp   = df[df$I >= max(df$I)/2,]$time
   t1max = tmp[1]

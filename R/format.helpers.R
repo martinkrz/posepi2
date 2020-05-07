@@ -39,6 +39,8 @@ varfmt = function(name=NULL,value=NULL,prec=1,percent=0,comma=0,units="") {
   # time                         
   name = str_replace_all(name, "\\b(T|t|A)\\b", function(x){sprintf("<i>%s</i>",x)})
   # time                         
+  name = str_replace_all(name, "_E", "<sub>E</sub>")
+  # time                         
   name = str_replace_all(name, "\\b(inf)\\b", "∞")
   
   if(name == "ip") {
