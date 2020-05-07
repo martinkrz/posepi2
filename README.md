@@ -28,7 +28,7 @@
 Download [R Studio](http://rstudio.com) and install packages.
 
 ```
-install.packages(c("shiny","deSolve","ggplot2","grid","stringr"))
+install.packages(c("shiny","deSolve","ggplot2","grid","stringr","tidyverse"))
 ```
 
 Run the app by loading `app.R` and cliking `Run App`.
@@ -45,9 +45,9 @@ Run the app by loading `app.R` and cliking `Run App`.
 
 ## Versions
 
-### v1.0.0
+### v0.1.0
 
-Initial release.
+In progress.
 
 ## Citation
 
@@ -55,5 +55,4 @@ Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. Points of Significance: Ad
 
 ## License
 
-This project is licensed under the GNU General Public License - see the [LICENSE](LICENSE) file for details.
-
+This proejct is licensed under the Creative Commons Attribution-NonCommercial 4.0 International Public License - see the [LICENSE](LICENSE) file for details.
