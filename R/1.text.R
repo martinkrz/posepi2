@@ -1,4 +1,7 @@
 output$text1 = renderPrint({ 
+  if(input$text1 == FALSE) {
+    return(base::invisible())
+  }
   ip    = input$ip1
   R0    = input$R01
   lp    = input$lp1
@@ -37,6 +40,7 @@ output$text1 = renderPrint({
                                                      "A",varfmt(value=A,prec=1,units="years"),
                                                      "pcrit",varfmt(value=1-1/R0,prec=0,percent=1)
   )))
+  
   
   cat(paste("<p>These interactive figures show how the SEIRS model of infection spread (see Equations tab) changes with varying parameters, such infectious period ",varfmt("1/gamma,"),"basic reproduction number",varfmt("R0,"),"latent period",varfmt("1/sigma,"),"immunity duration",varfmt("1/omega,"),"life expectancy",varfmt("1/mu"),"and vaccination level",varfmt("p."),sep=" "))
   cat(paste("<p>Figure 1 shows the trajectories of each of the groups in the model (susceptible, exposed, infected, recovered) for the model parameters shown in the table on the right."))

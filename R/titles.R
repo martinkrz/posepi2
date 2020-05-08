@@ -8,8 +8,10 @@ output$title1a = renderPrint({
 output$plot1a = renderPlot({
   p1()[[1]][[1]]
 })
-output$caption1a = renderPrint({ 
-  cat(paste("<p>",p1()[[4]][[1]],"</p>",sep=""))
+output$caption1a = renderPrint({
+  if(input$captions1 == TRUE) {
+    cat(paste("<p>",p1()[[4]][[1]],"</p>",sep=""))
+  }
 })
 output$title1b = renderPrint({
   index = p1()[[2]][[2]]
@@ -20,7 +22,9 @@ output$plot1b = renderPlot({
   p1()[[1]][[2]]
 })
 output$caption1b = renderPrint({ 
-  cat(paste("<p>",p1()[[4]][[2]],"</p>",sep=""))
+  if(input$captions1 == TRUE) {
+    cat(paste("<p>",p1()[[4]][[2]],"</p>",sep=""))
+  }
 })
 
 output$title2a <- renderPrint({

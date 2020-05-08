@@ -39,7 +39,10 @@ ui = fluidPage( theme=("css/style.css"),
                                                     min = 0, max = 99, step = 1),
                                         checkboxInput("log1", HTML("log axes"), FALSE),
                                         checkboxInput("points1", HTML("show time points"), TRUE),
-                                        checkboxInput("sir1",HTML("show SIR I(t) trajectory"),TRUE)
+                                        checkboxInput("sir1",HTML("show SIR I(t) trajectory"),TRUE),
+                                        checkboxInput("text1",HTML("interpretive text"),TRUE),
+                                        #checkboxInput("table1",HTML("parameter table"),TRUE),
+                                        checkboxInput("captions1",HTML("figure captions"),TRUE)
                                       ),
                                       mainPanel(h3("The SEIRS model of infection spread"),
                                                 div(htmlOutput("text1"),class="copy"),

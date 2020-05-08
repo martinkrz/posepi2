@@ -1,5 +1,3 @@
-## WORK IN PROGRESS (4 May 2020)
-
 #### SUPPLEMENTARY MATERIALS
 
 # Points of Significance: Adding realism to the SIR model for infectious disease epidemics
@@ -13,9 +11,7 @@
 
 [Interactive figures](https://shiny.bcgsc.ca/posepi2/) accompanying the column.
 
-<!---
-![Points of Significance: Modeling infectious epidemics](https://raw.githubusercontent.com/martinkrz/posepi1/master/www/img/screenshot.png)
--->
+![Points of Significance: Modeling infectious epidemics](https://raw.githubusercontent.com/martinkrz/posepi2/master/www/img/screenshot.png)
 
 ## Getting Started
 
@@ -49,10 +45,14 @@ Run the app by loading `app.R` and cliking `Run App`.
 
 In progress.
 
+## Background reading
+
+Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. [Points of Significance: Modelling infectious epidemics](https://www.nature.com/articles/s41592-020-0822-z) (2020) *Nature Methods* **17**:455-456.
+
 ## Citation
 
 Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. Points of Significance: Adding realism to the SIR model for infectious disease epidemics (2020) *Nature Methods* **17** (in press).
 
 ## License
 
-This proejct is licensed under the [Creative Commons Attribution-NonCommercial 4.0 International Public License](https://creativecommons.org/licenses/by-nc/4.0/). See the [LICENSE](LICENSE) file for details.
+This project is licensed under the [Creative Commons Attribution-NonCommercial 4.0 International Public License](https://creativecommons.org/licenses/by-nc/4.0/). See the [LICENSE](LICENSE) file for details.
