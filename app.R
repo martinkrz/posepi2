@@ -38,10 +38,11 @@ library(tidyverse)
 # 22-04-2020   spawned from posepi1
 # 04-05-2020   refactored plots and text into separate files
 # 06-05-2020   refactored LaTeX
+# 07-05-2020   refined text, added time points and SIR trajectory
 
 # CUSTOM SETTINGS
 # The colors of the SEIR groups and some greys (Cn)
-palette              = c(S="#333333",E="#a0d848",I="#f15a24",R="#29abe2",G="#8cc63f",C1="#333333",C2="#cccccc")
+palette              = c(S="#333333",E="#a0d848",I="#f15a24",R="#29abe2",G="#8cc63f",M="#ed1e79",C1="#333333",C2="#cccccc",C3="#cccccc")
 # Plot height and line width for trajectories
 plot_line_width      = 1.5
 plot_text_size       = 12

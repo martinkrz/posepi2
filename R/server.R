@@ -2,6 +2,8 @@ server = function(input, output, session) {
 
   #Make sure that the mitigation R0final max is smaller than R0init
   observe(updateSliderInput(session, "R0final", max = input$R0init-R0_step))
+  #Make sure that vaccination slider maxes out at p_c
+  observe(updateSliderInput(session, "p1", max = floor(100*(1-1/input$R01))))
   
   # generate the SEIRS trajectories and phase plane
   df1 = reactive(calculate1(input$R01,input$ip1,input$lp1,input$id1,input$le1,input$p1/100)) %>% throttle(1000)

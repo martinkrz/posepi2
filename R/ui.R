@@ -11,6 +11,8 @@ eq_age   = read_latex("latex/seirs.age-dependent.tex")
 eq_r0    = read_latex("latex/seirs.r0.tex")
 eq_period= read_latex("latex/seirs.period.tex")
 eq_endemic_age= read_latex("latex/seirs.endemic-age.tex")
+eq_jacobian= read_latex("latex/seirs.jacobian.tex")
+eq_eigenvalue= read_latex("latex/seirs.eigenvalue.tex")
 
 ui = fluidPage( theme=("css/style.css"),
                 htmlOutput("masthead"),
@@ -35,7 +37,9 @@ ui = fluidPage( theme=("css/style.css"),
                                                     min = 1, max = le_max, step = 1),
                                         sliderInput("p1", HTML("vaccination level, <i>p</i> (%)"), 0,
                                                     min = 0, max = 99, step = 1),
-                                        checkboxInput("log1", HTML("log axes"), FALSE)
+                                        checkboxInput("log1", HTML("log axes"), FALSE),
+                                        checkboxInput("points1", HTML("show time points"), TRUE),
+                                        checkboxInput("sir1",HTML("show SIR I(t) trajectory"),TRUE)
                                       ),
                                       mainPanel(h3("The SEIRS model of infection spread"),
                                                 div(htmlOutput("text1"),class="copy"),
@@ -137,14 +141,16 @@ ui = fluidPage( theme=("css/style.css"),
                            
                            tabPanel("Equations",value=2,id=2,
                                     withMathJax(
-                                      helpText(paste("SEIRS system $$",eq_seirs,"$$")),
+                                      helpText(paste("SEIRS system (dot indicates time derivative) $$",eq_seirs,"$$")),
                                       helpText(paste("Parameters (mean values) $$",eq_param,"$$")),
                                       helpText("Basic reproduction number $$",eq_r0,"$$"),
-                                      helpText(paste("Endemic equilibrium $$",eq_equil,"$$")),
-                                      helpText("Inter-epidemic period $$",eq_period,"$$"),
                                       helpText("Endemic mean age of infection $$",eq_endemic_age,"$$"),
-                                      helpText("Mean infectious period $$G_I = 1/\\gamma$$"),
-                                      helpText("Mean duration of immunity $$G_R = 1/\\omega$$")
+                                      #helpText("Mean infectious period $$G_\\textrm{I} = 1/(\\gamma + \\mu + \\alpha)$$"),
+                                      helpText(paste("Endemic equilibrium $$",eq_equil,"$$")),
+                                      p(paste("The inter-epidemic period is calculated from the largest imaginary part of eigenvalues of the Jacobian matrix evaluated at the endemic equilibrium.")),
+                                      helpText(paste("Jacobian matrix $$",eq_jacobian,"$$")),
+                                      helpText(paste("Eigenvalue equation and inter-epidemic period $$",eq_eigenvalue,"$$")),
+                                      helpText("Approximation of inter-epidemic period $$",eq_period,"$$")
                                       #,helpText(paste("Age-dependent model $$",eq_age,"$$"))
                                     ),
                                     
@@ -177,6 +183,10 @@ ui = fluidPage( theme=("css/style.css"),
                                       hr(),
                                       h4("Citation"),
                                       p(HTML("Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. Points of Significance: Adding realism to the SIR model for infectious disease epidemics. (2020) <i>Nature Methods</i> <b>17</b> (in press).")),
+                                      
+                                      h4("Background reading"),
+                                      p(HTML("Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. <a href='https://www.nature.com/articles/s41592-020-0822-z'>Points of Significance: Modelling infectious epidemics.</a> (2020) <i>Nature Methods</i> <b>17</b>:455&ndash;456.")),
+                                      
                                       
                                       hr(),
                                       h4("Version history"),

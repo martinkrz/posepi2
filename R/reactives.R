@@ -1,14 +1,16 @@
 
 # Panel 1: trajectories for a given R0, ip and vac
 calculate1 = function(R0,ip,lp,id,le,vac) {
-  gamma = 1/ip
-  sigma = 1/lp
-  omega = 1/(id*365)
-  mu    = 1/(le*365)
-  beta  = beta(R0,gamma,sigma,mu,model="seirs")
-  tmax  = seirs_t_bound(R0,gamma,sigma,omega,mu,vac)
-  out   = seirs(R0=R0, gamma=gamma, sigma=sigma, omega=omega, mu=mu, vac=vac, tmax=tmax,steps=sir_system_steps)
-  return(out)
+  gamma  = 1/ip
+  sigma  = 1/lp
+  omega  = 1/(id*365)
+  mu     = 1/(le*365)
+  beta   = beta(R0,gamma,sigma,mu,model="seirs")
+  tmax   = seirs_t_bound(R0,gamma,sigma,omega,mu,vac)
+  seirs  = seirs(R0=R0, gamma=gamma, sigma=sigma, omega=omega, mu=mu, vac=vac, tmax=tmax,steps=sir_system_steps)
+  sir_tmax = sir_t_bound(beta=R0*gamma,gamma=gamma,vac=vac,tol=sir_init_i/2,tmax=1000) 
+  sir      = sir(beta=R0*gamma,gamma=gamma,vac=vac,tmax=sir_tmax)
+  return(list(seirs,sir))
 }
 
 # Panel 2: step over R0 from Rinit to R0final
