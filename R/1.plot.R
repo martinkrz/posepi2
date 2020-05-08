@@ -42,7 +42,7 @@ plots1 = function(R0,ip,lp,id,le,p,alpha=0) {
   
   plot2 = plot2 + geom_path(aes(x=S,y=I,colour="C1"),size=plot_line_width)
   plot2 = plot2 + geom_path(data=df %>% filter(time <= period),mapping=aes(x=S,y=I,colour="M"),size=plot_line_width)
-  plot2 = plot2 + geom_hline(yintercept=stars$I,colour=palette["I"],size=plot_line_width/2,linetype="dashed")
+  plot2 = plot2 + geom_hline(yintercept=stars$I,colour=palette["S"],size=plot_line_width/2,linetype="dashed")
   plot2 = plot2 + geom_vline(xintercept=stars$S,colour=palette["S"],size=plot_line_width/2,linetype="dashed")
   
   # points every year
