@@ -187,7 +187,6 @@ ui = fluidPage( theme=("css/style.css"),
                                       h4("Background reading"),
                                       p(HTML("Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. <a href='https://www.nature.com/articles/s41592-020-0822-z'>Points of Significance: Modelling infectious epidemics.</a> (2020) <i>Nature Methods</i> <b>17</b>:455&ndash;456.")),
                                       
-                                      
                                       hr(),
                                       h4("Version history"),
                                       h5("22 April 2020"),

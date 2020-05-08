@@ -37,7 +37,7 @@ varfmt = function(name=NULL,value=NULL,prec=1,percent=0,comma=0,units="") {
   # vaccination                         
   name = str_replace_all(name, "pcrit", function(x){sprintf("<i>p</i><sub>c</sub>",str_remove(x,"crit"))})
   # time                         
-  name = str_replace_all(name, "\\b(T|t|A)\\b", function(x){sprintf("<i>%s</i>",x)})
+  name = str_replace_all(name, "\\b(T|t|A)", function(x){sprintf("<i>%s</i>",x)})
   # time                         
   name = str_replace_all(name, "_E", "<sub>E</sub>")
   # time                         
