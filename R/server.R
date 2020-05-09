@@ -1,20 +1,23 @@
 server = function(input, output, session) {
 
-  #Make sure that the mitigation R0final max is smaller than R0init
-  observe(updateSliderInput(session, "R0final", max = input$R0init-R0_step))
+  # reset form
+  observeEvent(input$refresh1, { shinyjs::reset("form1") })
+  observeEvent(input$text1,    { toggle(anim = TRUE, animType = "slide", time = 0.5, selector =".copy", condition = input$text1) })
+  observeEvent(input$captions1, { toggle(anim = TRUE, animType = "slide", time = 0.5, selector =".caption", condition = input$captions1) })
+
+  observeEvent(input$refresh2, { shinyjs::reset("form2") })
+  observeEvent(input$text2,    { toggle(anim = TRUE, animType = "slide", time = 0.5, selector =".copy", condition = input$text2) })
+  observeEvent(input$captions2, { toggle(anim = TRUE, animType = "slide", time = 0.5, selector =".caption", condition = input$captions2) })
+  
   #Make sure that vaccination slider maxes out at p_c
-  observe(updateSliderInput(session, "p1", max = floor(100*(1-1/input$R01))))
+  #observe(updateSliderInput(session, "p1", max = floor(100*(1-1/input$R01))))
 
   # generate the SEIRS trajectories and phase plane
   df1 = reactive(calculate1(input$R01,input$ip1,input$lp1,input$id1,input$le1,input$p1/100)) %>% throttle(1000)
   p1  = reactive(    plots1(input$R01,input$ip1,input$lp1,input$id1,input$le1,input$p1/100)) %>% throttle(1000)
-  
-  #df2 = reactive(calculate2(input$R0init,input$R0final,input$ip2)) %>% throttle(1000)
-  #df3 = reactive(calculate3(input$R0v,input$ip3)) %>% throttle(1000)
-  
-  # precompute all plots, indexes and titles for a panel, as needed
-  #p2 = reactive(plots2(input$R0init,input$R0final,input$ip2)) %>% throttle(1000)
-  #p3 = reactive(plots3(input$R0v,input$ip3)) %>% throttle(1000)
+
+  df2 = reactive(calculate2(input$R02,input$ip2,input$lp21,input$id21,input$le2,input$p2/100,input$lp22,input$id22)) %>% throttle(1000)
+  p2  = reactive(    plots2(input$R02,input$ip2,input$lp21,input$id21,input$le2,input$p2/100,input$lp22,input$id22)) %>% throttle(1000)
   
   report_timing = function(t0,t1) {
     if(do_timing) {

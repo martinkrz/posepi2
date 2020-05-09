@@ -26,17 +26,27 @@ body {
 	color: white;
 	margin-bottom:2px;
 }
+.mainpanel {
+    padding: 0 !important;
+}
+
+.paneltitle {
+	margin-bottom: 5px;
+	color:         #333;
+    font-weight:   bold;
+    font-size:     130%;
+}
 
 /* plot container and title, plot and caption */
 .plotbox {
-	clear: both;
-	margin: 20px 0 40px;
-	padding: 0;
+	clear:   both;
+	margin:  0 0 20px;
+	padding-top: 0.25em;
+	border-top: 1.5px solid #666;
 }
 .title {
 	padding: 0 0 5px 0;
 	margin-bottom: 5px;
-	border-top: 1.5px solid #666;
 	color: #333;
 }
 .plot {
@@ -49,10 +59,13 @@ body {
 	color: #666;
 	margin-bottom: 0em;
 }
-
+.copy {
+    margin-bottom: 20px;
+}
 .copy p {
 	margin: 0 0 0.5em 0;	
 }
+
 .affiliations p {
 	margin: 0;
 }
@@ -75,18 +88,29 @@ h4 {
 	text-transform: uppercase;
 	font-size: 90%;
 	font-weight: bold;
-	color: #333;
+	color:  #333;
 	margin: 1em 0 0.25em 0;
 }
 
 /* "Supplemental Figure N" in figure header */
+.fignumber {
+	font-weight: bold;
+	font-size:   100%;
+	color:       #333;
+    padding:     0;
+    margin:      0;
+}
 h5 {
 	font-weight: normal;
 	font-size:   100%;
 	color:       #333;
 	padding:     0;
-	margin-top:    0.5em;
+	margin-top:    2em;
     margin-bottom: 0.25em;
+    padding-bottom: 0.15em;
+    border-bottom: 1.5px solid #333;
+    text-transform: uppercase;
+    text-align: center;
 }
 h5 p {
 	margin: 0;
@@ -118,6 +142,13 @@ table {
 
 }
 
+.t1 {
+color: #720f3f;
+}
+
+.t2 {
+color: #3f747a;
+}
 
 table tr {
 	padding: 10px 0;

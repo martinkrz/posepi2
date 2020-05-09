@@ -1,5 +1,13 @@
 # This is messy but I don't know how else to do it.
 
+output$title1 = renderPrint({
+  if(input$text1) {
+    cat("<div class=paneltitle>The SEIRS model of infection spread</div>")
+  } else {
+    base::invisible()
+  }
+})
+
 output$title1a = renderPrint({
   index = p1()[[2]][[1]]
   title = p1()[[3]][[1]]
@@ -59,7 +67,7 @@ output$title2f <- renderPrint({
 })
 output$plot2a <- renderPlot({
   p2()[[1]][[1]]
-})
+}) #,height=600,width="auto")
 output$plot2b <- renderPlot({
   p2()[[1]][[2]]
 })

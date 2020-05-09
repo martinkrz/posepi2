@@ -22,7 +22,7 @@ plot_theme = function(p) {
   line_size   = 1
   tick_length = 5
   p + theme(plot.background  = element_blank(),
-            #aspect.ratio     = plot_aspect,
+            #aspect.ratio     = 1,
             panel.border     = element_blank(),
             panel.grid.major = element_blank(),
             panel.grid.minor = element_blank(),
@@ -43,7 +43,6 @@ plot_theme = function(p) {
             legend.title      = element_text(size=plot_text_size,face="bold",color="#333333"),
             legend.text       = element_text(size=plot_text_size),
             plot.margin       = unit(c(0, 75, 0, 0), "points")
-            
             #axis.title.x.top  = element_text(margin=margin(t=-3,unit="pt")),
             #axis.line.x.top  = element_line(margin=margin(t=-15,unit="pt"))
   )
@@ -51,8 +50,10 @@ plot_theme = function(p) {
 
 my.plot_legend = list(
   scale_colour_manual("GROUP", 
-                      breaks = c("S", "E", "I", "R","C1","M","C2","C3"),
-                      labels = c("susceptible","exposed","infected","recovered","I vs S (SEIRS)","first inter-epidemic interval","I vs S (SIR)","infected (SIR)"),
+                      breaks = c("S", "E", "I", "R","C1","M","C","C2","C3"),
+                      labels = c("susceptible","exposed","infected","recovered","I vs S (SEIRS)","first inter-epidemic interval",
+                                 "first inter-epidemic interval",
+                                 "I vs S (SIR)","infected (SIR)"),
                       values = palette)
 )  
 

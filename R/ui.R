@@ -15,17 +15,18 @@ eq_jacobian= read_latex("latex/seirs.jacobian.tex")
 eq_eigenvalue= read_latex("latex/seirs.eigenvalue.tex")
 
 ui = fluidPage( theme=("css/style.css"),
+                shinyjs::useShinyjs(),
                 htmlOutput("masthead"),
                 navbarPage("Adding realism to the SIR model for infectious disease epidemics",id="tabs",
-                           
                            tabPanel("The SEIRS model",value=1,id=1,
                                     sidebarLayout(
                                       sidebarPanel(
+                                        div(id="form1",
+                                            sliderInput("R01", HTML("<i>R</i><sub>0</sub>"), value = 3,
+                                                        min = 1, max = R0_max, step = R0_step),
                                         sliderInput("ip1", HTML("Infectious period, 1/<i>&gamma;</i> (days)"), 
                                                     value = ip_default,
                                                     min = 1, max = ip_max, step = 1),
-                                        sliderInput("R01", HTML("<i>R</i><sub>0</sub>"), value = 3,
-                                                    min = 1, max = R0_max, step = R0_step),
                                         sliderInput("lp1", HTML("Latent period, 1/<i>&sigma;</i> (days)"),
                                                     value = lp_default,
                                                     min = lp_min, max = lp_max, step = 1),
@@ -37,110 +38,76 @@ ui = fluidPage( theme=("css/style.css"),
                                                     min = 1, max = le_max, step = 1),
                                         sliderInput("p1", HTML("vaccination level, <i>p</i> (%)"), 0,
                                                     min = 0, max = 99, step = 1),
-                                        checkboxInput("log1", HTML("log axes"), FALSE),
+                                        checkboxInput("log1", HTML("log<sub>10</sub> axes"), FALSE),
                                         checkboxInput("points1", HTML("show time points"), TRUE),
-                                        checkboxInput("sir1",HTML("show SIR I(t) trajectory"),TRUE),
+                                        checkboxInput("sir1",HTML("show SIR <i>I</i>(<i>t</i>) trajectory"),TRUE),
                                         checkboxInput("text1",HTML("interpretive text"),TRUE),
                                         #checkboxInput("table1",HTML("parameter table"),TRUE),
-                                        checkboxInput("captions1",HTML("figure captions"),TRUE)
+                                        checkboxInput("captions1",HTML("figure captions"),TRUE),
+                                        actionButton("refresh1","Reset")
+                                        )
                                       ),
-                                      mainPanel(h3("The SEIRS model of infection spread"),
+                                      mainPanel(div(HTML("The SEIRS model of infection spread"),class="paneltitle"),
                                                 div(htmlOutput("text1"),class="copy"),
                                                 div(
                                                 div(htmlOutput("title1a"),class="title"),
-                                                div(plotOutput("plot1a"),class="plot"),
+                                                div(plotOutput("plot1a",height=500,width="auto"),class="plot"),
                                                 div(htmlOutput("caption1a"),class="caption"),
                                                 class="plotbox"),
                                                 div(
                                                 div(htmlOutput("title1b"),class="title"),
-                                                div(plotOutput("plot1b"),class="plot"),
+                                                div(plotOutput("plot1b",height=500,width="auto"),class="plot"),
                                                 div(htmlOutput("caption1b"),class="caption"),
                                                 class="plotbox")
                                       )
                                     )),
                            
-                           # tabPanel(HTML("Effect of <i>R</i><sub>0</sub> mitigation"),value=2,id=2,
-                           #          sidebarLayout(
-                           #            sidebarPanel(
-                           #              sliderInput("ip2", HTML("Infectious period, <i>ip</i> (days)"), value = ip_default,
-                           #                          min = 1, max = ip_max, step = 1),
-                           #              sliderInput("R0init", HTML("<i>R</i><sub>0</sub>"), 3,
-                           #                          min = 1.1, max = R0_max, step = R0_step),
-                           #              sliderInput("R0final", HTML("<i>R</i><sub>0</sub> with mitigation"), 2,
-                           #                          min = 1, max = R0_max, step = R0_step),
-                           #              sliderInput("capacity", HTML("Hospital capacity, <i>C</i> %"), 5,
-                           #                          min = 1, max = 100, step = 1),
-                           #              checkboxInput("show2", HTML("show intermediate trajectories"), FALSE)
-                           #            ),
-                           #            mainPanel(
-                           #              h3(HTML("Effect of <i>R</i><sub>0</sub> mitigation on infection spread")),
-                           #              div(htmlOutput("text2"),class="copy"),
-                           #              div(
-                           #              div(htmlOutput("title2a"),class="title"),
-                           #              div(plotOutput("plot2a"),class="plot"),
-                           #              div(htmlOutput("caption2a"),class="caption"),
-                           #              class="plotbox"),
-                           #              div(
-                           #              div(htmlOutput("title2b"),class="title"),
-                           #              div(plotOutput("plot2b"),class="plot"),
-                           #              div(htmlOutput("caption2b"),class="caption"),
-                           #              class="plotbox"),
-                           #              div(
-                           #              div(htmlOutput("title2c"),class="title"),
-                           #              div(plotOutput("plot2c"),class="plot"),
-                           #              div(htmlOutput("caption2c"),class="caption"),
-                           #              class="plotbox"),
-                           #              div(
-                           #              div(htmlOutput("title2d"),class="title"),
-                           #              div(plotOutput("plot2d"),class="plot"),
-                           #              div(htmlOutput("caption2d"),class="caption"),
-                           #              class="plotbox"),
-                           #              div(
-                           #              div(htmlOutput("title2e"),class="title"),
-                           #              div(plotOutput("plot2e"),class="plot"),
-                           #              div(htmlOutput("caption2e"),class="caption"),
-                           #              class="plotbox"),
-                           #              div(
-                           #              div(htmlOutput("title2f"),class="title"),
-                           #              div(plotOutput("plot2f"),class="plot"),
-                           #              div(htmlOutput("caption2f"),class="caption"),
-                           #              class="plotbox")
-                           #            )
-                           #          )),
-                           # 
-                           # tabPanel("Effect of vaccination",value=3,id=3,
-                           #          sidebarLayout(
-                           #            sidebarPanel(
-                           #              sliderInput("ip3",HTML("Infectious period, <i>ip</i> (days)"), value = ip_default,
-                           #                          min = 1, max = ip_max, step = 1),
-                           #              sliderInput("R0v", HTML("<i>R</i><sub>0</sub>"), 2,
-                           #                          min = 1, max = R0_max, step = R0_step)
-                           #            ),
-                           #            mainPanel(h3("Effect of vaccination on infection spread"),
-                           #                      div(htmlOutput("text3"),class="copy"),
-                           #                      div(
-                           #                      div(htmlOutput("title3a"),class="title"),
-                           #                      div(plotOutput("plot3a"),class="plot"),
-                           #                      div(htmlOutput("caption3a"),class="caption"),
-                           #                      class="plotbox"),
-                           #                      div(
-                           #                      div(htmlOutput("title3b"),class="title"),
-                           #                      div(plotOutput("plot3b"),class="plot"),
-                           #                      div(htmlOutput("caption3b"),class="caption"),
-                           #                      class="plotbox"),
-                           #                      div(
-                           #                      div(htmlOutput("title3c"),class="title"),
-                           #                      div(plotOutput("plot3c"),class="plot"),
-                           #                      div(htmlOutput("caption3c"),class="caption"),
-                           #                      class="plotbox"),
-                           #                      div(
-                           #                      div(htmlOutput("title3d"),class="title"),
-                           #                      div(plotOutput("plot3d"),class="plot"),
-                           #                      div(htmlOutput("caption3d"),class="caption"),
-                           #                      class="plotbox")
-                           #            )
-                           #            
-                           #          )),
+                           tabPanel("Phase Plane",value=2,id=2,
+                                    sidebarLayout(
+                                      sidebarPanel(
+                                        div(id="form2",
+                                            sliderInput("R02", HTML("<i>R</i><sub>0</sub>"), value = 3,
+                                                        min = 1, max = R0_max, step = R0_step),
+                                            sliderInput("ip2", HTML("Infectious period, 1/<i>&gamma;</i> (days)"), 
+                                                        value = ip_default,
+                                                        min = 1, max = ip_max, step = 1),
+                                            sliderInput("le2", HTML("Life expectancy, 1/<i>&mu;</i> (years)"),
+                                                        value = le_default,
+                                                        min = 1, max = le_max, step = 1),
+                                            sliderInput("p2", HTML("vaccination level, <i>p</i> (%)"), 0,
+                                                        min = 0, max = 99, step = 1),
+                                            HTML("<h5>First trajectory</h5>"),
+                                            sliderInput("lp21", HTML("Latent period, 1/<i>&sigma;</i> (days)"),
+                                                        value = lp_default,
+                                                        min = lp_min, max = lp_max, step = 1),
+                                            sliderInput("id21", HTML("Immunity duration, 1/<i>&omega;</i> (years)"),
+                                                        value = id_default,
+                                                        min = id_step, max = id_max, step = id_step),
+                                            HTML("<h5>second trajectory</h5>"),
+                                            sliderInput("lp22", HTML("Latent period, 1/<i>&sigma;</i> (days)"),
+                                                        value = lp_default,
+                                                        min = lp_min, max = lp_max, step = 1),
+                                            sliderInput("id22", HTML("Immunity duration, 1/<i>&omega;</i> (years)"),
+                                                        value = 2*id_default,
+                                                        min = id_step, max = id_max, step = id_step),
+                                            
+                                            checkboxInput("log2", HTML("log<sub>10</sub> axes"), FALSE),
+                                            checkboxInput("points2", HTML("show time points"), TRUE),
+                                            checkboxInput("sir2",HTML("show SIR <i>I</i>(<i>t</i>) trajectory"),TRUE),
+                                            checkboxInput("text2",HTML("interpretive text"),TRUE),
+                                            checkboxInput("captions2",HTML("figure captions"),TRUE),
+                                            actionButton("refresh2","Reset")
+                                        )
+                                      ),
+                                      mainPanel(div(HTML("Exploring the SEIRS phase plane"),class="paneltitle"),
+                                                div(htmlOutput("text2"),class="copy"),
+                                                div(
+                                                  div(htmlOutput("title2a"),class="title"),
+                                                  div(plotOutput("plot2a",height=600,width="auto"),class="plot"),
+                                                  div(htmlOutput("caption2a"),class="caption"),
+                                                  class="plotbox")
+                                      )
+                                    )),
                            
                            tabPanel("Equations",value=2,id=2,
                                     withMathJax(

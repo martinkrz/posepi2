@@ -164,7 +164,7 @@ varfmt = function(name=NULL,value=NULL,prec=1,percent=0,comma=0,units="") {
 }
 
 titlefmt = function(index,title) {
-  sprintf("<h5><b>Supplemental Figure %d</b></h5><p>%s</p>",index,title)
+  sprintf("<p class=fignumber>Supplemental Figure %d.</p><p>%s</p>",index,title)
 }
 
 label_to_percent = function(str) {
@@ -185,12 +185,10 @@ floorToFraction = function(num, den = 1) {
   return(x)
 }
 
-table = function(rows,title=NULL) {
+table = function(rows,class="normal",title=NULL) {
   cat("<div class=parameters>")
-  if(! is.null(title)) {
-    cat(paste("<div>",title,"</div>"))
-  }
-  cat(paste("<table>"))
+  cat(paste(sprintf("<div class=%s>%s</div>",class,title)))
+  cat("<table>")
   for(i in 1:nrow(rows)) {
     row = rows[i,]
     cat(paste("<tr><td>",row$name,"</td><td>",row$value,"</td></tr>",sep=""))

@@ -28,6 +28,7 @@ require(ggplot2)
 library(grid)
 library(stringr)
 library(tidyverse)
+library(shinyjs)
 #
 # 2. Getting started
 #
@@ -42,7 +43,7 @@ library(tidyverse)
 
 # CUSTOM SETTINGS
 # The colors of the SEIR groups and some greys (Cn)
-palette              = c(S="#333333",E="#a0d848",I="#f15a24",R="#29abe2",G="#8cc63f",M="#ed1e79",C1="#333333",C2="#cccccc",C3="#cccccc")
+palette              = c(S="#333333",E="#a0d848",I="#f15a24",R="#29abe2",G="#8cc63f",M="#ed1e79",MD="#720f3f",C="#6eccdc",CD="#3f747a",C1="#333333",C2="#cccccc",C3="#cccccc")
 # Plot height and line width for trajectories
 plot_line_width      = 1.5
 plot_text_size       = 12
