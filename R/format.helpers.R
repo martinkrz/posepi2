@@ -1,3 +1,17 @@
+figure_title = function(index,title) {
+  sprintf("<p class=fignumber>Figure %d.</p><p>%s</p>",index,title)
+}
+table = function(rows,class="normal",title=NULL) {
+  cat("<div class=parameters>")
+  cat(paste(sprintf("<div class=%s>%s</div>",class,title)))
+  cat("<table>")
+  for(i in 1:nrow(rows)) {
+    row = rows[i,]
+    cat(paste("<tr><td>",row$name,"</td><td>",row$value,"</td></tr>",sep=""))
+  }
+  cat("</table></div>")
+}
+
 varfmt = function(name=NULL,value=NULL,prec=1,percent=0,comma=0,units="") {
   trailing = ""
   if(is.null(name)) {
@@ -163,10 +177,6 @@ varfmt = function(name=NULL,value=NULL,prec=1,percent=0,comma=0,units="") {
   return(str)
 }
 
-titlefmt = function(index,title) {
-  sprintf("<p class=fignumber>Supplemental Figure %d.</p><p>%s</p>",index,title)
-}
-
 label_to_percent = function(str) {
   str = sprintf("%f",str*100)
   parse(text=str)
@@ -174,26 +184,13 @@ label_to_percent = function(str) {
 label_to_identity = function(str) {
   return(str)
 }
-
 ceilToFraction = function(num, den = 1) {
   x = den * ceiling( num / den)
   return(x)
 }
-
 floorToFraction = function(num, den = 1) {
   x = den * floor(num / den)
   return(x)
-}
-
-table = function(rows,class="normal",title=NULL) {
-  cat("<div class=parameters>")
-  cat(paste(sprintf("<div class=%s>%s</div>",class,title)))
-  cat("<table>")
-  for(i in 1:nrow(rows)) {
-    row = rows[i,]
-    cat(paste("<tr><td>",row$name,"</td><td>",row$value,"</td></tr>",sep=""))
-  }
-  cat("</table></div>")
 }
 
 makerows = function(items) {

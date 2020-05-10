@@ -1,4 +1,4 @@
-multiplot  =function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+multiplot  = function(..., plotlist=NULL, file, cols=1, layout=NULL) {
   plots <- c(list(...), plotlist)
   numPlots = length(plots)
   if (is.null(layout)) {

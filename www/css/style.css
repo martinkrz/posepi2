@@ -30,6 +30,15 @@ body {
     padding: 0 !important;
 }
 
+.header {
+	text-align:center;
+	font-weight: bold;
+	margin-bottom: 1em;
+}
+#buttons {
+	/*border:  1px solid red;*/
+}
+
 .paneltitle {
 	margin-bottom: 5px;
 	color:         #333;

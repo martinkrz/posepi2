@@ -22,9 +22,9 @@
 #
 # 1. Requirements
 #
-require(shiny)
-require(deSolve)
-require(ggplot2)
+library(shiny)
+library(deSolve)
+library(ggplot2)
 library(grid)
 library(stringr)
 library(tidyverse)
@@ -43,7 +43,18 @@ library(shinyjs)
 
 # CUSTOM SETTINGS
 # The colors of the SEIR groups and some greys (Cn)
-palette              = c(S="#333333",E="#a0d848",I="#f15a24",R="#29abe2",G="#8cc63f",M="#ed1e79",MD="#720f3f",C="#6eccdc",CD="#3f747a",C1="#333333",C2="#cccccc",C3="#cccccc")
+palette              = c(S="#333333",
+                         E="#a0d848",
+                         I="#f15a24",
+                         R="#29abe2",
+                         G="#8cc63f",
+                         M="#ed1e79",
+                         MD="#720f3f",
+                         C="#6eccdc",
+                         CD="#3f747a",
+                         C1="#333333",
+                         C2="#cccccc",
+                         C3="#cccccc")
 # Plot height and line width for trajectories
 plot_line_width      = 1.5
 plot_text_size       = 12
@@ -54,6 +65,7 @@ sir_system_time_step = 0.01 # last resort default, shouldn't be used
 # Infectious period max and default. Slider step is 1.
 ip_max               = 28
 ip_default           = 14
+ip_step              = 1
 # R0 max and slider step
 R0_max               = 5
 R0_step              = 0.1
@@ -61,13 +73,22 @@ R0_step              = 0.1
 lp_max               = 28
 lp_default           = 7
 lp_min               = 1
+lp_step              = 1
 # Immunity duration max and default. Slider step is 0.1. Units are years.
+id_min               = 1
 id_max               = 10
 id_default           = 1
 id_step              = 0.1
 # Life expectancy max and default. Slider step is 1. Units are years.
+le_min               = 10
 le_max               = 100
 le_default           = 76
+le_step              = 1
+# Alpha
+al_min               = 0
+al_max               = 1000
+al_default           = 0
+al_step              = 1
 # do timings
 do_timing            = FALSE
 

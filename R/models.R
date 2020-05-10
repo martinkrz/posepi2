@@ -1,46 +1,73 @@
-
 # beta for SEIRS (default) and anything else (e.g. SIR) 
-beta = function(R0,gamma,sigma=0,mu=0,alpha=0,model="seirs") {
-  if(model == "seirs" | sigma > 0 | mu > 0) {
-    f = (gamma + mu + alpha) * (sigma + mu) / sigma
+get_beta = function(p) {
+  if(p$sigma > 0 | p$mu > 0) {
+    f = (p$gamma + p$mu + p$alpha) * (p$sigma + p$mu) / p$sigma
   } else {
-    f = gamma
+    f = p$gamma
   }
-  beta = R0 * f
+  beta = p$R0 * f
   return(beta)
+}
+
+# omega, mu inputs are in years
+# all rates are returned as per day
+# all times are in days
+get_params = function(R0,ip=0,lp=0,id=0,le=0,al=0,p=0) {
+  out = as.list(c(R0    = R0,
+                  gamma = ifelse(ip,1/ip,0),
+                  sigma = ifelse(lp,1/lp,0),
+                  omega = ifelse(id,1/(365*id),0),
+                  mu    = ifelse(le,1/(365*le),0),
+                  alpha = ifelse(al,1/al,0),
+                  p     = p,
+                  N     = 1,
+                  ip    = ip,
+                  lp    = lp,
+                  id    = 365*id,
+                  le    = 365*le
+                  ))
+  out$pc     = 1-1/out$R0
+  out$beta   = get_beta(out)
+  out$A      = (out$omega+out$mu+out$gamma)/( (out$omega+out$mu) * (out$beta-out$gamma-out$mu) )
+  out$cfr    = out$alpha/(out$gamma+out$mu+out$alpha)
+  out$stars  = stars(out)
+  out$period = ieperiod(out)
+  return(out)
 }
 
 ############################################################################
 ### SIR
-# estimate how long the outbreak lasts - this will be used as time axis max
-sir_t_bound = function(beta,gamma,vac=0,tol=sir_init_i/2,tmax=1000,steps=sir_system_steps) {
+# estimate how long the outbreak lasts
+sir_t_bound = function(params,tol=sir_init_i/2,tmax=1000,steps=sir_system_steps) {
   # get a quick solution out to long time
-  R0 = beta/gamma
-  if(R0 <= 1 | vac >= 1-1/R0) {
+  if(params$R0 <= 1 | params$p >= 1-1/params$R0) {
     return(1000)
   }
-  df     = sir(beta,gamma,vac,tmax=tmax,steps=steps)
+  df     = sir(params,tmax=tmax,steps=steps)
   df_cut = df[df$I >= tol,]
   return( df_cut[nrow(df_cut),]$time )
 }
 # vac is the vaccination fraction - it is removed from S but not added to R
-sir = function(beta=3, gamma=2, vac=0, tmax=20, steps=sir_system_steps) {
-  time  = seq(0, tmax, length.out=steps)
-  parms = c(mu=0, N=1, beta=beta, gamma=gamma)
-  start = c(S=1-sir_init_i-vac, I=sir_init_i, R=0)
+sir = function(params,tmax,steps=sir_system_steps) {
+  time   = seq(0, tmax, length.out=steps)
+  # squash and replace parameters
+  params = replace(params,c("mu","beta"),c(0,params$R0*params$gamma))
+  start = c(S = params$N-sir_init_i-params$p, 
+            I = sir_init_i, 
+            R = params$p)
   out   = ode(y     = start, 
               times = time, 
               func  = sir_system, 
-              parms = parms)
-  out   = cbind(out,data.frame(R0=beta/gamma,vac=vac))
+              parms = unlist(params))
+  out   = cbind(out,data.frame(R0=params$R0,beta=params$beta,p=params$p))
   return(as.data.frame(out))
 }
-sir_system=function(t, x, parms){
+sir_system = function(t, x, parms){
   S = x[1]
   I = x[2]
   R = x[3]
   beta  = parms["beta"]
-  mu    = parms["mu"]    # we're not using this here
+  mu    = parms["mu"]    
   gamma = parms["gamma"]
   N     = parms["N"]
   dS    = mu*(N-S)  - beta*S*I/N
@@ -53,28 +80,31 @@ sir_system=function(t, x, parms){
 ############################################################################
 ## SEIRS
 # estimate how long the outbreak lasts - this will be used as time axis max
-seirs_t_bound = function(R0,gamma,sigma,omega,mu,vac=0,tol=10*sir_init_i,steps=2*sir_system_steps) {
+seirs_t_bound = function(params,tol=10*sir_init_i,steps=2*sir_system_steps) {
   # get a quick solution out to long time (10 * 1/omega)
-  beta  = beta(R0,gamma,sigma,mu,model="seirs")
-  df    = seirs(R0,gamma,sigma,omega,mu,tmax=ceiling(10/omega),steps=steps)
+  #beta  = beta(R0,gamma,sigma,mu,model="seirs")
+  df    = seirs(params,tmax=ceiling(10 * 1/params$omega),steps=steps)
   # Find the last time for which (S-S*)/S* > 0.001 
-  stars = stars(R0,gamma,sigma,omega,mu)
+  stars = stars(params)
   dfok  = df[abs(df$S - stars$S)/stars$S > tol,]
   t     = tail(dfok,n=1)$t
   return(t)
 }
 
 # vac is the vaccination fraction - it is removed from S but not added to R
-seirs = function(R0=3, gamma=1/14, sigma=1/7, omega=1/365, mu=1/(365*76), vac=0, tmax=365*5, steps=sir_system_steps) {
-  beta  = beta(R0,gamma,sigma,mu,model="seirs")
-  time  = seq(0, tmax, length.out=steps)
-  parms = c(p=vac,mu=mu, N=1, beta=beta, gamma=gamma, sigma=sigma, omega=omega, mu=mu)
-  start = c(S=1-sir_init_i-vac, E=sir_init_i, I=0, R=vac)
+seirs = function(params, tmax, steps=sir_system_steps) {
+  #beta    = beta(R0,gamma,sigma,mu,model="seirs")
+  time     = seq(0,tmax,length.out=steps)
+  #parms = c(p=vac,mu=mu, N=1, beta=beta, gamma=gamma, sigma=sigma, omega=omega, mu=mu)
+  start = c(S = params$N - sir_init_i - params$p, 
+            E = sir_init_i, 
+            I = 0, 
+            R = params$p)
   out   = ode(y     = start, 
               times = time, 
               func  = seirs_system, 
-              parms = parms)
-  out   = cbind(out,data.frame(R0=R0,beta=beta,vac=vac))
+              parms = unlist(params))
+  out   = cbind(out,data.frame(R0=params$R0,beta=params$beta,p=params$p))
   return(as.data.frame(out))
 }
 
@@ -88,32 +118,33 @@ seirs_system=function(t,x,params) {
   omega= params["omega"]
   sigma= params["sigma"]
   gamma= params["gamma"]
+  alpha= params["alpha"]
   p    = params["p"]
 
-  dS = -beta*S*I + omega*R  + mu*(1-p) - mu*S 
-  dE = -sigma*E  + beta*S*I            - mu*E
-  dI = -gamma*I  + sigma*E             - mu*I
-  dR = -omega*R  + gamma*I  + mu*p     - mu*R
-  #     ^          ^          ^        ^
-  #     outflow    inflow     birth    death
-  res= c(dS, dE, dI, dR)
+  dS  = -beta*S*I + omega*R  + mu*(1-p) - mu*S 
+  dE  = -sigma*E  + beta*S*I            - mu*E
+  dI  = -gamma*I  + sigma*E             - (mu+alpha)*I
+  dR  = -omega*R  + gamma*I  + mu*p     - mu*R
+  #      ^          ^          ^          ^
+  #      outflow    inflow     birth      death
+  res = c(dS, dE, dI, dR)
   list(res)
 }
 
-stars = function(R0,gamma,sigma,omega,mu) {
-  beta  = beta(R0,gamma,sigma,mu)
-  Sstar = 1/R0
-  Istar = mu*(1-Sstar)/(beta*Sstar - (omega*gamma/(mu+omega)))
-  Estar = (mu+gamma)*Istar/sigma
-  Rstar = gamma*Istar/(mu+omega)
+stars = function(params) {
+  #beta  = beta(R0,gamma,sigma,mu)
+  Sstar = 1/params$R0
+  Istar = params$mu*(1-Sstar)/(params$beta*Sstar - (params$omega*params$gamma/(params$mu+params$omega)))
+  Estar = (params$mu+params$gamma)*Istar/params$sigma
+  Rstar = params$gamma*Istar/(params$mu+params$omega)
   return(as.list(c(S=Sstar,E=Estar,I=Istar,R=Rstar)))
 }
 
-ieperiod = function(R0,gamma,sigma,omega,mu,p=0,alpha=0) {
-  beta  = beta(R0,gamma,sigma,mu)
-  paras = c(mu=mu, beta=beta, sigma=sigma, gamma=gamma, omega=omega, alpha=alpha, p=p)
-  stars = stars(R0,gamma,sigma,omega,mu)
-  star  = c(stars,as.list(paras))
+ieperiod = function(params) {
+  #beta  = beta(R0,gamma,sigma,mu)
+  #paras = c(mu=mu, beta=beta, sigma=sigma, gamma=gamma, omega=omega, alpha=alpha, p=p)
+  stars = stars(params)
+  star  = c(stars(params),params)
   names(star)[1:4]=c("S", "E", "I", "R")
 
   fns=list(

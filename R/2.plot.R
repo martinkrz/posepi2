@@ -1,26 +1,16 @@
-plots2 = function(R0,ip,lp1,id1,le,p,lp2,id2,alpha=0) {
+plots2 = function(params1,params2) {
 
   out     = df2()
   df1     = out[[1]]
   df2     = out[[2]]
   dfsir   = out[[3]]
-  gamma   = 1/ip
-  mu      = 1/(365*le)
-  sigma1  = 1/lp1
-  omega1  = 1/(365*id1)
-  sigma2  = 1/lp2
-  omega2  = 1/(365*id2)
-  
-  beta1   = beta(R0,gamma,sigma1,mu,model="seirs")
-  beta2   = beta(R0,gamma,sigma2,mu,model="seirs")
-  
-  stars1  = stars(R0,gamma,sigma1,omega1,mu)
-  period1 = ieperiod(R0,gamma,sigma2,omega2,mu,p=p)
 
-  stars2   = stars(R0,gamma,sigma2,omega2,mu)
-  period2  = ieperiod(R0,gamma,sigma2,omega2,mu,p=p)
+  #stars1  = stars(params1)
+  #period1 = ieperiod(params1)
+  #stars2   = stars(params2)
+  #period2  = ieperiod(params2)
     
-  tmax    = max(df$time)
+  tmax     = max(df1$time,df2$time)
   
   # minimum I that is above S(0), this is for setting minimum y-axis values for log plots
   t0      = df1[df1$I > sir_init_i,]$time[1] 
@@ -44,14 +34,14 @@ plots2 = function(R0,ip,lp1,id1,le,p,lp2,id2,alpha=0) {
   }
   
   plot1 = plot1 + geom_path(data=df1,aes(x=S,y=I,colour="MD"),size=plot_line_width)
-  plot1 = plot1 + geom_path(data=df1 %>% filter(time <= period1),mapping=aes(x=S,y=I,colour="M"),size=plot_line_width)
-  plot1 = plot1 + geom_hline(yintercept=stars1$I,colour=palette["S"],size=plot_line_width/2,linetype="dashed")
-  plot1 = plot1 + geom_vline(xintercept=stars1$S,colour=palette["S"],size=plot_line_width/2,linetype="dashed")
+  plot1 = plot1 + geom_path(data=df1 %>% filter(time <= params1$period),mapping=aes(x=S,y=I,colour="M"),size=plot_line_width)
+  plot1 = plot1 + geom_hline(yintercept=params1$stars$I,colour=palette["S"],size=plot_line_width/2,linetype="dashed")
+  plot1 = plot1 + geom_vline(xintercept=params1$stars$S,colour=palette["S"],size=plot_line_width/2,linetype="dashed")
   
   plot1 = plot1 + geom_path(data=df2,mapping=aes(x=S,y=I,colour="CD"),size=plot_line_width)
-  plot1 = plot1 + geom_path(data=df2 %>% filter(time <= period2),mapping=aes(x=S,y=I,colour="C"),size=plot_line_width)
-  plot1 = plot1 + geom_hline(yintercept=stars2$I,colour=palette["S"],size=plot_line_width/2,linetype="dashed")
-  plot1 = plot1 + geom_vline(xintercept=stars2$S,colour=palette["S"],size=plot_line_width/2,linetype="dashed")
+  plot1 = plot1 + geom_path(data=df2 %>% filter(time <= params2$period),mapping=aes(x=S,y=I,colour="C"),size=plot_line_width)
+  plot1 = plot1 + geom_hline(yintercept=params2$stars$I,colour=palette["S"],size=plot_line_width/2,linetype="dashed")
+  plot1 = plot1 + geom_vline(xintercept=params2$stars$S,colour=palette["S"],size=plot_line_width/2,linetype="dashed")
   
   # points every year
   if(input$points2 == TRUE) {
@@ -63,15 +53,23 @@ plots2 = function(R0,ip,lp1,id1,le,p,lp2,id2,alpha=0) {
     quarterly1      = df1[!duplicated(df1$quarter) & df1$quarter,]
     quarterly2      = df2[!duplicated(df2$quarter) & df2$quarter,]
     
-    plot1 = plot1 + geom_point(data=quarterly1 %>% filter(quarter%%4 == 0 & time <= period1*n_periods),mapping=aes(x=S,y=I),colour=palette["C1"],fill="black",size=point_size_mag*plot_line_width,stroke=plot_line_width,shape=21)
-    plot1 = plot1 + geom_point(data=quarterly1 %>% filter(quarter%%4 > 0  & time <= period1*n_periods),mapping=aes(x=S,y=I),colour=palette["C1"],fill="white",size=point_size_mag*plot_line_width,stroke=plot_line_width,shape=21)
+    plot1 = plot1 + geom_point(data=quarterly1 %>% filter(quarter%%4 == 0 & time <= params1$period*n_periods),mapping=aes(x=S,y=I),colour=palette["C1"],fill="black",size=point_size_mag*plot_line_width,stroke=plot_line_width,shape=21)
+    plot1 = plot1 + geom_point(data=quarterly1 %>% filter(quarter%%4 > 0  & time <= params1$period*n_periods),mapping=aes(x=S,y=I),colour=palette["C1"],fill="white",size=point_size_mag*plot_line_width,stroke=plot_line_width,shape=21)
     
-    plot1 = plot1 + geom_point(data=quarterly2 %>% filter(quarter%%4 == 0 & time <= period2*n_periods),mapping=aes(x=S,y=I),colour=palette["C1"],fill="black",size=point_size_mag*plot_line_width,stroke=plot_line_width,shape=21)
-    plot1 = plot1 + geom_point(data=quarterly2 %>% filter(quarter%%4 > 0  & time <= period2*n_periods),mapping=aes(x=S,y=I),colour=palette["C1"],fill="white",size=point_size_mag*plot_line_width,stroke=plot_line_width,shape=21)
+    plot1 = plot1 + geom_point(data=quarterly2 %>% filter(quarter%%4 == 0 & time <= params2$period*n_periods),mapping=aes(x=S,y=I),colour=palette["C1"],fill="black",size=point_size_mag*plot_line_width,stroke=plot_line_width,shape=21)
+    plot1 = plot1 + geom_point(data=quarterly2 %>% filter(quarter%%4 > 0  & time <= params2$period*n_periods),mapping=aes(x=S,y=I),colour=palette["C1"],fill="white",size=point_size_mag*plot_line_width,stroke=plot_line_width,shape=21)
     
   }
-  cat(paste(lp1,id1,lp2,id2,R0,beta1))
-  param_text = sprintf("<i>R</i><sub>0</sub> = %.1f, 1/<i>&beta;</i> = %.2f days, 1/<i>&gamma;</i> = %d days, 1/<i>&sigma;</i> = %d days, 1/<i>&omega;</i> = %.1f years, 1/<i>&mu;</i> = %d years and <i>&alpha;</i> = %.0f with %.0f%% of the population vaccinated.",R0,beta1,ip,lp1,id1,le,alpha,100*p)
+  #cat(paste(lp1,id1,lp2,id2,R0,beta1))
+  param_text = sprintf("<i>R</i><sub>0</sub> = %.1f, 1/<i>&beta;</i> = %.2f days, 1/<i>&gamma;</i> = %d days, 1/<i>&sigma;</i> = %d days, 1/<i>&omega;</i> = %.1f years, 1/<i>&mu;</i> = %d years and <i>&alpha;</i> = %.0f with %.0f%% of the population vaccinated.",
+                       params1$R0,
+                       params1$beta,
+                       params1$ip,
+                       params1$lp,
+                       params1$id/365,
+                       params1$le/365,
+                       params1$alpha,
+                       params1$p*100)
   
   title1 = sprintf("Phase plane of <i>I</i> vs <i>S</i> for %s",param_text)
   
@@ -81,16 +79,16 @@ plots2 = function(R0,ip,lp1,id1,le,p,lp2,id2,alpha=0) {
                                                 dlog10=input$log2,
                                                 ysec=0,xpercent=1)
   
-    caption1 = paste("The phase plane of",varfmt("I(t)"),"vs",varfmt("S(t)"),"for the SEIRS model with",param_text,"Horizontal dashed lines represent endemic equilibrium values. The trajectory over the first inter-epidemic interval",varfmt("t ≤ T_E",period1/365,prec=2,units="years"),"is shown in magenta.")
+    caption1 = paste("The phase plane of",varfmt("I(t)"),"vs",varfmt("S(t)"),"for the SEIRS model with",param_text,"Horizontal dashed lines represent endemic equilibrium values. The trajectory over the first inter-epidemic interval",varfmt("t ≤ T_E",params1$period/365,prec=2,units="years"),"is shown in magenta.")
     
   if(input$points2 == TRUE) {
-    caption1 = paste(caption1,"Points on the trajectory indicate time in steps of 1 year (solid) or one quarter (hollow) over the first",n_periods,"inter-epidemic intervals",varfmt("T_E.",period1/365,units="years",prec=2))
+    caption1 = paste(caption1,"Points on the trajectory indicate time in steps of 1 year (solid) or one quarter (hollow) over the first",n_periods,"inter-epidemic intervals",varfmt("T_E.",params1$period/365,units="years",prec=2))
   }
   if(input$sir2) {
     caption1 = paste(caption1,"Grey trace shows infected trajectory of a closed epidemic from the SIR model with the same parameters.")
   }
     
-  caption1 = paste(caption1,sir_caption(tmax,p))
+  caption1 = paste(caption1,sir_caption(tmax,params1$p))
 
   if(input$sir1) {
     caption1 = paste(caption1,"SIR trajectory was computed similarly with the same",varfmt("R0"),"and",varfmt("gamma."))
