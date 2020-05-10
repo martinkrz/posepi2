@@ -45,8 +45,7 @@ ui = fluidPage( theme=("css/style.css"),
                                         checkboxInput("log1", HTML("log<sub>10</sub> axes"), FALSE),
                                         checkboxInput("points1", HTML("show time points"), TRUE),
                                         checkboxInput("sir1",HTML("show SIR <i>I</i>(<i>t</i>) trajectory"),TRUE),
-                                        checkboxInput("text1",HTML("interpretive text"),TRUE),
-                                        #checkboxInput("table1",HTML("parameter table"),TRUE),
+                                        checkboxInput("text1",HTML("interpretive text"),FALSE),
                                         checkboxInput("captions1",HTML("figure captions"),TRUE),
                                         actionButton("refresh1","Reset")
                                         )
@@ -54,7 +53,7 @@ ui = fluidPage( theme=("css/style.css"),
                                       column(8,id="main1",
                                       #mainPanel(
                                         div(HTML("The SEIRS model of infection spread"),class="paneltitle"),
-                                        div(htmlOutput("text1intro"),class="copy"),
+                                        div(htmlOutput("text1intro"),class="copy copy1"),
                                         tabsetPanel(
                                           tabPanel("Trajectory",
                                                 div(htmlOutput("text1a"),class="copy copy1"),
@@ -79,7 +78,7 @@ ui = fluidPage( theme=("css/style.css"),
                            tabPanel("Phase Plane",value=2,id=2,
                                     fluidRow(
                                     
-                                      column(4,id="side2",
+                                      column(4,id="form2",
                                       fluidRow(
                                         column(6,HTML("<h5>First trajectory</h5>")),
                                         column(6,HTML("<h5>Second trajectory</h5>"))
@@ -88,63 +87,63 @@ ui = fluidPage( theme=("css/style.css"),
                                         column(12,class="header",HTML("<i>R</i><sub>0</sub>"))
                                       ),
                                       fluidRow(
-                                        column(6,sliderInput("R021", NA,value = 3,
+                                        column(6,sliderInput("R021",NULL,value = 3,
                                                                  min = 1, max = R0_max, step = R0_step)),
-                                        column(6,sliderInput("R022", NA,value = 3,
+                                        column(6,sliderInput("R022",NULL,value = 3,
                                                                  min = 1, max = R0_max, step = R0_step))
                                       ),
                                       fluidRow(
                                         column(12,class="header",HTML("Infectious period, 1/<i>&gamma;</i> (days)"))
                                       ),
                                       fluidRow(
-                                        column(6,sliderInput("ip21",NA, value = ip_default,
+                                        column(6,sliderInput("ip21",NULL, value = ip_default,
                                                                  min = 1, max = ip_max, step = 1)),
-                                        column(6,sliderInput("ip22",NA, value = ip_default,
+                                        column(6,sliderInput("ip22",NULL, value = ip_default,
                                                                  min = 1, max = ip_max, step = 1))
                                       ),
                                       fluidRow(
                                         column(12,class="header",HTML("Latent period, 1/<i>&sigma;</i> (days)"))
                                       ),
                                       fluidRow(
-                                        column(6,sliderInput("lp21", NA, value = lp_default,
+                                        column(6,sliderInput("lp21",NULL, value = lp_default,
                                                                      min = lp_min, max = lp_max, step = 1)),
-                                        column(6,sliderInput("lp22", NA, value = lp_default,
+                                        column(6,sliderInput("lp22",NULL, value = lp_default,
                                                              min = lp_min, max = lp_max, step = 1))
                                       ),
                                       fluidRow(
                                         column(12,class="header",HTML("Immunity duration 1/<i>&omega;</i> (years)"))
                                       ),
                                       fluidRow(
-                                        column(6,sliderInput("id21", NA, value = id_default,
+                                        column(6,sliderInput("id21",NULL, value = id_default,
                                                              min = id_min, max = id_max, step = id_step)),
-                                        column(6,sliderInput("id22", NA, value = 2*id_default,
+                                        column(6,sliderInput("id22",NULL, value = 2*id_default,
                                                              min = id_min, max = id_max, step = id_step))
                                       ),
                                       fluidRow(
                                         column(12,class="header",HTML("Life expectancy 1/<i>&mu;</i> (years)"))
                                       ),
                                       fluidRow(
-                                        column(6,sliderInput("le21", NA, value = le_default,
+                                        column(6,sliderInput("le21",NULL, value = le_default,
                                                              min = le_min, max = le_max, step = le_step)),
-                                        column(6,sliderInput("le22", NA, value = le_default,
+                                        column(6,sliderInput("le22",NULL, value = le_default,
                                                              min = le_min, max = le_max, step = le_step))
                                       ),
                                       fluidRow(
                                         column(12,class="header",HTML("Disease death onset 1/<i>&alpha;</i> (days)"))
                                       ),
                                       fluidRow(
-                                        column(6,sliderInput("al21", NA, value = al_default,
+                                        column(6,sliderInput("al21",NULL, value = al_default,
                                                              min = al_min, max = al_max, step = al_step)),
-                                        column(6,sliderInput("al22", NA, value = al_default,
+                                        column(6,sliderInput("al22",NULL, value = al_default,
                                                              min = al_min, max = al_max, step = al_step))
                                       ),
                                       fluidRow(
                                         column(12,class="header",HTML("Vaccination level, <i>p</i> (%)"))
                                       ),
                                       fluidRow(
-                                        column(6,sliderInput("p21", NA, value = 0,
+                                        column(6,sliderInput("p21",NULL, value = 0,
                                                              min = 0, max = 99, step = 1)),
-                                        column(6,sliderInput("p22", NA, value = 0,
+                                        column(6,sliderInput("p22",NULL, value = 0,
                                                              min = 0, max = 99, step = 1))
                                       ),
                                       fluidRow(
@@ -152,7 +151,7 @@ ui = fluidPage( theme=("css/style.css"),
                                             checkboxInput("log2", HTML("log<sub>10</sub> axes"), TRUE),
                                             checkboxInput("points2", HTML("show time points"),   TRUE),
                                             checkboxInput("sir2",HTML("show SIR <i>I</i>(<i>t</i>) trajectory"),TRUE),
-                                            checkboxInput("text2",HTML("interpretive text"),     TRUE),
+                                            checkboxInput("text2",HTML("interpretive text"),     FALSE),
                                             checkboxInput("captions2",HTML("figure captions"),   TRUE),
                                             actionButton("refresh2","Reset")
                                       )

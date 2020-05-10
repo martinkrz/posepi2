@@ -79,7 +79,7 @@ plots1 = function(params) { #R0,ip,lp,id,le,alpha=0,p=0) {
     
   if(input$points1 == TRUE) {
     caption1 = paste(caption1,"Points on the trajectory of",varfmt("I"),"indicate time in steps of 1 year (solid) or one quarter (hollow) over the first",n_periods,"inter-epidemic intervals",varfmt("T_E.",params$period/365,units="years",prec=2))
-    caption1 = paste(caption1,"Points on the trajectory indicate time in steps of 1 year (solid) or one quarter (hollow) over the first",n_periods,"inter-epidemic intervals",varfmt("T_E.",params$period/365,units="years",prec=2))
+    caption2 = paste(caption1,"Points on the trajectory indicate time in steps of 1 year (solid) or one quarter (hollow) over the first",n_periods,"inter-epidemic intervals",varfmt("T_E.",params$period/365,units="years",prec=2))
   }
   if(input$sir1) {
     caption1 = paste(caption1,"Grey trace shows infected trajectory of a closed epidemic from the SIR model with the same parameters.")
