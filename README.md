@@ -1,5 +1,3 @@
-#### SUPPLEMENTARY MATERIALS
-
 # Points of Significance: Adding realism to the SIR model for infectious disease epidemics
 
 ##### Ottar Bjørnstad<sup>1,2</sup>, Katriona Shea<sup>1</sup>, Martin Krzywinski<sup>3*</sup>, Naomi Altman<sup>4</sup>
