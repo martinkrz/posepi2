@@ -3,6 +3,11 @@ server = function(input, output, session) {
   source("R/models.R",local=TRUE)
   source("R/reactives.R",local=TRUE)
   source("R/1.plot.R",local=TRUE)
+  source("R/1.text.R",local=TRUE)
+  source("R/2.text.R",local=TRUE)
+  
+  source("R/2.plot.R",local=TRUE)
+  
   
   ### UI QOL settings
   # reset form
@@ -41,11 +46,7 @@ server = function(input, output, session) {
     }
   }
 
-  source("R/1.text.R",local=TRUE)
-  source("R/2.text.R",local=TRUE)
-  source("R/3.text.R",local=TRUE)
-  source("R/2.plot.R",local=TRUE)
-  source("R/3.plot.R",local=TRUE)
+  
   source("R/titles.R",local=TRUE)
   source("R/masthead.captions.R",local=TRUE)
   

@@ -16,6 +16,9 @@ eq_eigenvalue= read_latex("latex/seirs.eigenvalue.tex")
 
 ui = fluidPage( theme=("css/style.css"),
                 shinyjs::useShinyjs(),
+                setSliderColor(c(rep("",7),
+                                 rep(c(palette["M"],palette["C"]),8)),
+                               c(1:21)),
                 htmlOutput("masthead"),
                 navbarPage("Adding realism to the SIR model for infectious disease epidemics",id="tabs",
                            tabPanel("The SEIRS model",value=1,id=1,
@@ -77,14 +80,13 @@ ui = fluidPage( theme=("css/style.css"),
                            
                            tabPanel("Phase Plane",value=2,id=2,
                                     fluidRow(
-                                    
                                       column(4,id="form2",
                                       fluidRow(
-                                        column(6,HTML("<h5>First trajectory</h5>")),
-                                        column(6,HTML("<h5>Second trajectory</h5>"))
+                                        column(6,HTML("<h5 class=t1>Scenario 1</h5>")),
+                                        column(6,HTML("<h5 class=t2>Scenario 2</h5>"))
                                       ),
                                       fluidRow(
-                                        column(12,class="header",HTML("<i>R</i><sub>0</sub>"))
+                                        column(12,class="header",HTML("Basic reproduction number, <i>R</i><sub>0</sub>"))
                                       ),
                                       fluidRow(
                                         column(6,sliderInput("R021",NULL,value = 3,
@@ -129,7 +131,7 @@ ui = fluidPage( theme=("css/style.css"),
                                                              min = le_min, max = le_max, step = le_step))
                                       ),
                                       fluidRow(
-                                        column(12,class="header",HTML("Disease death onset 1/<i>&alpha;</i> (days)"))
+                                        column(12,class="header",HTML("Death onset 1/<i>&alpha;</i> (days)"))
                                       ),
                                       fluidRow(
                                         column(6,sliderInput("al21",NULL, value = al_default,

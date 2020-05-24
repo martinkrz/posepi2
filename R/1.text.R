@@ -25,7 +25,7 @@ output$text1intro = renderPrint({
   cat(paste("<p>These interactive figures show how predictions from the SEIRS model (see Equations tab) change as a function of parameters such infectious period ",varfmt("(1/gamma),"),"basic reproduction number",varfmt("(R0),"),"latent period",varfmt("(1/sigma),"),"immunity duration",varfmt("(1/omega),"),"life expectancy",varfmt("(1/mu),"),"death onset",varfmt("(1/alpha)"),"and vaccination level",varfmt("p."),sep=" "))
   
   cat(paste("<h4>key observations</h4>"))
-  cat(paste("When",varfmt("R0 > 1"),"and when there is susceptibility recruitment through loss of immunity",varfmt("(omega)"),"or birth",varfmt("(mu)"),"the epidemic is said to be 'open'. The SEIRS trajectories eventually reach endemic equilibrium, meaning that",varfmt("Einf",params$stars$E,prec=1,percent=1),"and",varfmt("Iinf",params$stars$I,prec=1,percent=1),"are non-zero."))
+  cat(paste("<p>When",varfmt("R0 > 1"),"and when there is susceptibility recruitment through loss of immunity",varfmt("(omega)"),"or birth",varfmt("(mu)"),"the epidemic is said to be 'open'. The SEIRS trajectories eventually reach endemic equilibrium, meaning that",varfmt("Einf",params$stars$E,prec=1,percent=1),"and",varfmt("Iinf",params$stars$I,prec=1,percent=1),"are non-zero."))
   cat(paste("<p>On the way to equilibrium, the trajectories exhibit epidemic waves whose period",varfmt("T_E",params$period/365,units="years",prec=2),"(inter-epidemic interval) is a function of model parameters. These waves should not be confused with seasonal epidemic trends, which are a result of temporal variation in",varfmt("beta.")))
   cat("<br clear=both>")
 

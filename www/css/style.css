@@ -128,14 +128,14 @@ h4 {
     margin:      0;
 }
 h5 {
-	font-weight: normal;
+	font-weight: bold;
 	font-size:   100%;
 	color:       #333;
 	padding:     0;
-	margin-top:    2em;
-    margin-bottom: 0.25em;
+	margin-top:    1em;
+    margin-bottom: 1em;
     padding-bottom: 0.15em;
-    border-bottom: 1.5px solid #333;
+    /*border-bottom: 1.5px solid #333;*/
     text-transform: uppercase;
     text-align: center;
 }
@@ -170,11 +170,25 @@ table {
 }
 
 .t1 {
-color: #720f3f;
+color: #ed1e79 !important;
+}
+.t2 {
+color: #6eccdc !important;
+}
+.s1,.s2 {	
+	padding: 0.15em 0.25em;
+	font-weight: bold;
+	color: white;
+}
+.s1 {
+	background: #ed1e79;
+}
+.s2 {
+	background: #6eccdc;
 }
 
-.t2 {
-color: #3f747a;
+.pad {
+	margin-bottom: 1em;
 }
 
 table tr {

@@ -50,10 +50,32 @@ plot_theme = function(p) {
 
 my.plot_legend = list(
   scale_colour_manual("GROUP", 
-                      breaks = c("S", "E", "I", "R","C1","M","C","C2","C3"),
-                      labels = c("susceptible","exposed","infected","recovered","I vs S (SEIRS)","first inter-epidemic interval",
+                      breaks = c("S", "E", "I", "R",
+                                 "C1",
+                                 "MD",
+                                 "CD",
+                                 "M",
+                                 "C",
+                                 "C2",
+                                 "C3"),
+                      labels = c("susceptible","exposed","infected","recovered",
+                                 "I vs S (SEIRS)",
+                                 "Scenario 1",
+                                 "Scenario 2",
+                                 "first inter-epidemic interval",
                                  "first inter-epidemic interval",
                                  "I vs S (SIR)","infected (SIR)"),
+                      values = palette)
+)
+my.plot_legend2 = list(
+  scale_colour_manual("GROUP", 
+                      breaks = c("M",
+                                 "C",
+                                 "C2"),
+                      labels = c(
+                                 "Scenario 1",
+                                 "Scenario 2",
+                                 "I vs S (SIR)"),
                       values = palette)
 )  
 

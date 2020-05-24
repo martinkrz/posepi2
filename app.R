@@ -29,6 +29,7 @@ library(grid)
 library(stringr)
 library(tidyverse)
 library(shinyjs)
+library(shinyWidgets)
 #
 # 2. Getting started
 #

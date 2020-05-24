@@ -45,9 +45,9 @@ output$text2 = renderPrint({
                                                      
   )))
 
-  #cat(paste("<p>These interactive figures show how the SEIRS model of infection spread (see Equations tab) changes with varying parameters, such infectious period ",varfmt("1/gamma,"),"basic reproduction number",varfmt("R0,"),"latent period",varfmt("1/sigma,"),"immunity duration",varfmt("1/omega,"),"life expectancy",varfmt("1/mu"),"and vaccination level",varfmt("p."),sep=" "))
-  cat(paste("<p>The phase plane is ...",varfmt("I(t)"),"vs.",varfmt("S(t)"),"..."))
+  cat(paste("<p>The phase plane of ",varfmt("I(t)"),"vs.",varfmt("S(t)"),"is helpful to understand how the endemic equilibria",varfmt("Iinf"),"and",varfmt("Sinf"),"change. When",varfmt("R0 > 1"),"and when there is susceptibility recruitment through loss of immunity",varfmt("(omega)"),"or birth",varfmt("(mu)"),"the epidemic is said to be 'open' and the phase plane trajectories will be spirals that converge to these equilibrium values."))
+  cat(paste("<p>To see the rate at which the trajectory evolves, we can place points on the spiral that correspond to specific times from the start of the first epidemic (e.g. quarterly, yearly)."))
   cat(paste("<h4>key observations</h4>"))
-  cat(paste("The trajectories eventually reach endemic equilibrium and for",varfmt("R0"),"> 1 and when there is susceptibility recruitment through loss of immunity or birth, we have an 'open epidemic' and both",varfmt("Einf",params1$stars$E,prec=1,percent=1),"and",varfmt("Iinf",params1$stars$I,prec=1,percent=1),"are non-zero and",varfmt("Sinf"),"=",varfmt("1/R0.",params1$stars$S,prec=1,percent=1),"On the way to equilibrium, the trajectories exhibit epidemic waves whose period",varfmt("T_E",params1$period/365,units="years",prec=2),"(inter-epidemic interval) is a function of model parameters (see Equation tab)."))
+  cat(paste("The endemic equilibrium",varfmt("Sinf = 1/R0"),"and is not significantly influenced by the latency paeriod",varfmt("1/sigma"),"when",varfmt("sigma ≫ mu."),"On the other hand, the",varfmt("Iinf"),"is influenced by",varfmt("omega"),"and decreases as the immunity duration",varfmt("1/omega"),"increases (see Equations tab)."))
   
 })
