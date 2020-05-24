@@ -23,7 +23,7 @@ ui = fluidPage( theme=("css/style.css"),
                                       column(4,id="sidebar1",
                                       #sidebarPanel(
                                         div(id="form1",
-                                            sliderInput("R01", HTML("<i>R</i><sub>0</sub>"), value = 3,
+                                            sliderInput("R01", HTML("Basic reproduction number, <i>R</i><sub>0</sub>"), value = 3,
                                                         min = 1, max = R0_max, step = R0_step),
                                         sliderInput("ip1", HTML("Infectious period, 1/<i>&gamma;</i> (days)"), 
                                                     value = ip_default,
@@ -58,7 +58,7 @@ ui = fluidPage( theme=("css/style.css"),
                                           tabPanel("Trajectory",
                                                 div(htmlOutput("text1a"),class="copy copy1"),
                                                 div(
-                                                  div(htmlOutput("title1a"),class="title"),
+                                                  #div(htmlOutput("title1a"),class="title"),
                                                   div(plotOutput("plot1a",height=500,width="auto"),class="plot"),
                                                   div(htmlOutput("caption1a"),class="caption caption1"),
                                                 class="plotbox")
@@ -66,7 +66,7 @@ ui = fluidPage( theme=("css/style.css"),
                                           tabPanel("Phase plane",
                                                    div(htmlOutput("text1b"),class="copy copy1"),
                                                 div(
-                                                  div(htmlOutput("title1b"),class="title"),
+                                                  #div(htmlOutput("title1b"),class="title"),
                                                   div(plotOutput("plot1b",height=500,width="auto"),class="plot"),
                                                   div(htmlOutput("caption1b"),class="caption caption1"),
                                                 class="plotbox")
@@ -219,10 +219,8 @@ ui = fluidPage( theme=("css/style.css"),
                                       
                                       hr(),
                                       h4("Version history"),
-                                      h5("22 April 2020"),
-                                      p("Starting work."),
-                                      h5("5 May 2020"),
-                                      p("Refactored."),
+                                      h5("23 May 2020 v1.0.0"),
+                                      p("Initial public release."),
                                       width=16
                                       
                                     ))

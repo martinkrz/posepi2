@@ -44,10 +44,12 @@ plots1 = function(params) { #R0,ip,lp,id,le,alpha=0,p=0) {
     quarterly      = df[!duplicated(df$quarter) & df$quarter,]
     n_periods      = 3
     point_size_mag = 1.5
-    plot1 = plot1 + geom_point(data=quarterly %>% filter(quarter%%4 == 0 & time <= params$period*n_periods),mapping=aes(x=time,y=I),colour=palette["I"],fill="black",size=point_size_mag*plot_line_width,stroke=plot_line_width,shape=21)
+    plot1 = plot1 + geom_point(data=quarterly %>% filter(quarter%%4 == 0 & time <= params$period*n_periods),mapping=aes(x=time,y=I),colour=palette["I"],fill=palette["I"],size=point_size_mag*plot_line_width,stroke=plot_line_width,shape=21)
     plot1 = plot1 + geom_point(data=quarterly %>% filter(quarter%%4 > 0  & time <= params$period*n_periods),mapping=aes(x=time,y=I),colour=palette["I"],fill="white",size=point_size_mag*plot_line_width,stroke=plot_line_width,shape=21)
-    plot2 = plot2 + geom_point(data=quarterly %>% filter(quarter%%4 == 0 & time <= params$period*n_periods),mapping=aes(x=S,y=I),colour=palette["C1"],fill="black",size=point_size_mag*plot_line_width,stroke=plot_line_width,shape=21)
-    plot2 = plot2 + geom_point(data=quarterly %>% filter(quarter%%4 > 0  & time <= params$period*n_periods),mapping=aes(x=S,y=I),colour=palette["C1"],fill="white",size=point_size_mag*plot_line_width,stroke=plot_line_width,shape=21)
+    plot2 = plot2 + geom_point(data=quarterly %>% filter(quarter%%4 == 0 & time <= params$period),mapping=aes(x=S,y=I),colour=palette["M"],fill=palette["M"],size=point_size_mag*plot_line_width,stroke=plot_line_width,shape=21)
+    plot2 = plot2 + geom_point(data=quarterly %>% filter(quarter%%4 > 0  & time <= params$period),mapping=aes(x=S,y=I),colour=palette["M"],fill="white",size=point_size_mag*plot_line_width,stroke=plot_line_width,shape=21)
+    plot2 = plot2 + geom_point(data=quarterly %>% filter(quarter%%4 == 0 & time > params$period & time <= params$period*n_periods),mapping=aes(x=S,y=I),colour=palette["C1"],fill=palette["C1"],size=point_size_mag*plot_line_width,stroke=plot_line_width,shape=21)
+    plot2 = plot2 + geom_point(data=quarterly %>% filter(quarter%%4 > 0  & time > params$period & time <= params$period*n_periods),mapping=aes(x=S,y=I),colour=palette["C1"],fill="white",size=point_size_mag*plot_line_width,stroke=plot_line_width,shape=21)
   }
 
   param_text = sprintf("<i>R</i><sub>0</sub> = %.1f, 1/<i>&beta;</i> = %.2f days, 1/<i>&gamma;</i> = %d days, 1/<i>&sigma;</i> = %d days, 1/<i>&omega;</i> = %.1f years, 1/<i>&mu;</i> = %d years and <i>&alpha;</i> = %.2f/day with %.0f%% of the population vaccinated.",
@@ -79,7 +81,7 @@ plots1 = function(params) { #R0,ip,lp,id,le,alpha=0,p=0) {
     
   if(input$points1 == TRUE) {
     caption1 = paste(caption1,"Points on the trajectory of",varfmt("I"),"indicate time in steps of 1 year (solid) or one quarter (hollow) over the first",n_periods,"inter-epidemic intervals",varfmt("T_E.",params$period/365,units="years",prec=2))
-    caption2 = paste(caption1,"Points on the trajectory indicate time in steps of 1 year (solid) or one quarter (hollow) over the first",n_periods,"inter-epidemic intervals",varfmt("T_E.",params$period/365,units="years",prec=2))
+    caption2 = paste(caption2,"Points on the trajectory indicate time in steps of 1 year (solid) or one quarter (hollow) over the first",n_periods,"inter-epidemic intervals",varfmt("T_E.",params$period/365,units="years",prec=2))
   }
   if(input$sir1) {
     caption1 = paste(caption1,"Grey trace shows infected trajectory of a closed epidemic from the SIR model with the same parameters.")

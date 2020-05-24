@@ -46,12 +46,30 @@ body {
     font-size:     130%;
 }
 
+.nav-tabs {
+	padding: 0 0.5em;
+	margin:  1em 0 0em;
+	line-height: inherit;
+	/*border: 1px solid red;*/
+}
+.nav-tabs li a {
+	padding: 0.5em;
+	margin: 0 0.5em;
+	color: black;
+}
+#tabs li.active a {
+	background: #ddd !important;
+}
+#tabs li a:hover {	
+	background: #eee !important;
+}
+
 /* plot container and title, plot and caption */
 .plotbox {
 	clear:   both;
 	margin:  0 0 20px;
 	padding-top: 0.25em;
-	border-top: 1.5px solid #666;
+	/*border-top: 1.5px solid #666;*/
 }
 .title {
 	padding: 0 0 5px 0;

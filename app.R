@@ -77,6 +77,7 @@ lp_step              = 1
 # Immunity duration max and default. Slider step is 0.1. Units are years.
 id_min               = 1
 id_max               = 10
+id_max               = 10
 id_default           = 1
 id_step              = 0.1
 # Life expectancy max and default. Slider step is 1. Units are years.
@@ -92,9 +93,9 @@ al_step              = 1
 # do timings
 do_timing            = FALSE
 
-source("R/format.helpers.R",local=T)
-source("R/ggplot.helpers.R",local=T)
-source("R/ui.R",local=T)
-source("R/server.R",local=T)
+source("R/format.helpers.R",local=TRUE)
+source("R/ggplot.helpers.R",local=TRUE)
+source("R/ui.R",local=TRUE)
+source("R/server.R",local=TRUE)
 
 shinyApp(ui,server)
