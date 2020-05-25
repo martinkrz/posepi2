@@ -39,9 +39,9 @@ Run the app by loading `app.R` and cliking `Run App`.
 
 ## Versions
 
-### v0.1.0
+### v1.0.0
 
-In progress.
+First public release.
 
 ## Background reading
 

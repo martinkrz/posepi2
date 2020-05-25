@@ -17,9 +17,12 @@ deSolve
 ggplot2
 grid
 stringr
+tidyverse
+shinyjs
+shinyWidgets
 
-using 
+using this comment
 
-install.packages(c("shiny","deSolve","ggplot2","grid","stringr"))
+install.packages(c("shiny","deSolve","ggplot2","grid","stringr","tidyverse","shinyjs","shinyWidgets"))
 
-Finally, runn the app by loading app.R in R Studio and clicking "Run App".
+Finally, run the app by loading app.R in R Studio and clicking "Run App".
