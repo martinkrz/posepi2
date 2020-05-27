@@ -20,7 +20,7 @@ ui = fluidPage( theme=("css/style.css"),
                                  rep(c(palette["M"],palette["C"]),8)),
                                c(1:21)),
                 htmlOutput("masthead"),
-                navbarPage("Adding realism to the SIR model for infectious disease epidemics",id="tabs",
+                navbarPage("The SEIRS model for infectious disease dynamics",id="tabs",
                            tabPanel("The SEIRS model",value=1,id=1,
                                     fluidRow(
                                       column(4,id="sidebar1",
@@ -55,21 +55,21 @@ ui = fluidPage( theme=("css/style.css"),
                                       ),
                                       column(8,id="main1",
                                       #mainPanel(
-                                        div(HTML("The SEIRS model of infection spread"),class="paneltitle"),
+                                        div(HTML("The SEIRS model accounts for latency and loss of immunity"),class="paneltitle"),
                                         div(htmlOutput("text1intro"),class="copy copy1"),
                                         tabsetPanel(
-                                          tabPanel("Trajectory",
-                                                div(htmlOutput("text1a"),class="copy copy1"),
+                                          tabPanel("Trajectories",
+                                                #div(htmlOutput("text1a"),class="copy copy1"),
                                                 div(
-                                                  #div(htmlOutput("title1a"),class="title"),
+                                                  div(htmlOutput("title1a"),class="title"),
                                                   div(plotOutput("plot1a",height=500,width="auto"),class="plot"),
                                                   div(htmlOutput("caption1a"),class="caption caption1"),
                                                 class="plotbox")
                                           ),
                                           tabPanel("Phase plane",
-                                                   div(htmlOutput("text1b"),class="copy copy1"),
+                                                  #div(htmlOutput("text1b"),class="copy copy1"),
                                                 div(
-                                                  #div(htmlOutput("title1b"),class="title"),
+                                                  div(htmlOutput("title1b"),class="title"),
                                                   div(plotOutput("plot1b",height=500,width="auto"),class="plot"),
                                                   div(htmlOutput("caption1b"),class="caption caption1"),
                                                 class="plotbox")
@@ -198,7 +198,7 @@ ui = fluidPage( theme=("css/style.css"),
                            
                            tabPanel("Download & Credits",value=3,id=3,
                                     mainPanel(
-                                      h3("Points of Significance: Adding realism to the SIR model for infectious disease epidemics"),
+                                      h3("Points of Significance: The SEIRS model for infectious disease dynamics"),
                                       p(HTML("Ottar Bjørnstad<sup>1,2</sup>, Katriona Shea<sup>1</sup>, Martin Krzywinski<sup>3*</sup>, Naomi Altman<sup>4</sup>")),
                                       div(
                                       p("1. Department of Biology, The Pennsylvania State University, State College, PA, USA."),
@@ -214,7 +214,7 @@ ui = fluidPage( theme=("css/style.css"),
                                       
                                       hr(),
                                       h4("Citation"),
-                                      p(HTML("Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. Points of Significance: Adding realism to the SIR model for infectious disease epidemics. (2020) <i>Nature Methods</i> <b>17</b> (in press).")),
+                                      p(HTML("Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. Points of Significance: The SEIRS model for infectious disease dynamics. (2020) <i>Nature Methods</i> <b>17</b> (in press).")),
                                       
                                       h4("Background reading"),
                                       p(HTML("Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. <a href='https://www.nature.com/articles/s41592-020-0822-z'>Points of Significance: Modelling infectious epidemics.</a> (2020) <i>Nature Methods</i> <b>17</b>:455&ndash;456.")),

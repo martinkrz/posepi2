@@ -87,7 +87,7 @@ plots2 = function(params1,params2) {
                                                 dlog10=input$log2,
                                                 ysec=0,xpercent=1)
   
-    caption1 = paste("The phase plane of",varfmt("I(t)"),"vs",varfmt("S(t)"),"for the SEIRS model for two scenarios:",HTML("<span class=s1>1</span>"),param1_text,"and",HTML("<span class=s2>2</span>"),paste(param2_text,".",sep=""),"Horizontal dashed lines represent endemic equilibrium values. For each scenario, the trajectory over the first inter-epidemic interval",varfmt("t ≤ T_E",params1$period/365,prec=2,units="years"),"is shown in a brigther color.")
+    caption1 = paste("The phase plane of",varfmt("I(t)"),"vs",varfmt("S(t)"),"for the SEIRS model for two scenarios:",HTML("<span class=s1>1</span>"),param1_text,"and",HTML("<span class=s2>2</span>"),paste(param2_text,".",sep=""),"Horizontal dashed lines represent endemic equilibrium values. For each scenario, the trajectory over the first inter-epidemic interval",varfmt("t ≤ T_E",params1$period/365,prec=2,units="years"),"is shown in a brighter color.")
     
   if(input$points2 == TRUE) {
     caption1 = paste(caption1,"Points on the trajectory indicate time in steps of 1 year (solid) or one quarter (hollow) over the first",n_periods,"inter-epidemic intervals",varfmt("T_E.",params1$period/365,units="years",prec=2))

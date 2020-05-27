@@ -48,16 +48,23 @@ body {
 
 .nav-tabs {
 	padding: 0 0.5em;
-	margin:  1em 0 0em;
-	line-height: inherit;
+	margin:  1em 0 0.5em;
+	line-height:    inherit;
+	font-weight:    500;
+	font-size:      90%;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;	
 	/*border: 1px solid red;*/
 }
 .nav-tabs li a {
 	padding: 0.5em;
 	margin: 0 0.5em;
+	color: #666;
+}
+.nav-tabs li.active a {
 	color: black;
 }
-#tabs li.active a {
+#tabs li.active a {	
 	background: #ddd !important;
 }
 #tabs li a:hover {	

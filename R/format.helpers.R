@@ -43,13 +43,17 @@ varfmt = function(name=NULL,value=NULL,prec=1,percent=0,comma=0,units="") {
   # stars,
   name = str_replace_all(name, "\\b(.star)\\b", function(x){sprintf("<i>%s</i><sup>*</sup>",str_remove(x,"star"))})
   # initial values, e.g. Szero
-  name = str_replace_all(name, "\\b(.zero)\\b", function(x){sprintf("<i>%s</i>(0)",str_remove(x,"zero"))})
+  name = str_replace_all(name, "\\b(.zero)", function(x){sprintf("<i>%s</i>(0)",str_remove(x,"zero"))})
   # R0
   name = str_replace_all(name, "\\bR0\\b", function(x){sprintf("<i>R</i><sub>0</sub>",x)})
   # min,max subscripts
   name = str_replace_all(name, "(min|max)\\b", function(x){sprintf("<sub>%s</sub>",x)})
   # vaccination                         
   name = str_replace_all(name, "pcrit", function(x){sprintf("<i>p</i><sub>c</sub>",str_remove(x,"crit"))})
+  # vaccination                         
+  name = str_replace_all(name, "\\bp\\b", function(x){sprintf("<i>p</i>")})
+  # vaccination                         
+  name = str_replace_all(name, "\\bpmu\\b", function(x){sprintf("<i>p&mu;</i>")})
   # time                         
   name = str_replace_all(name, "\\b(T|t|A)", function(x){sprintf("<i>%s</i>",x)})
   # time                         
@@ -148,7 +152,6 @@ varfmt = function(name=NULL,value=NULL,prec=1,percent=0,comma=0,units="") {
     #name = HTML("<i>&mu;</i>")
   }
 
-
   if(! is.null(value)) {
     if(comma) {
       fmtstr = sprintf("%%s = %%s")
@@ -174,6 +177,7 @@ varfmt = function(name=NULL,value=NULL,prec=1,percent=0,comma=0,units="") {
   if(trailing != "") {
     str = paste(str,trailing,sep="")
   }
+  str = str_replace_all(str, "-", "&ndash;")
   return(str)
 }
 
