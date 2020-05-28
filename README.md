@@ -1,4 +1,4 @@
-# Points of Significance: Adding realism to the SIR model for infectious disease epidemics
+# Points of Significance: The SEIRS model for infectious disease dynamics
 
 ##### Ottar Bjørnstad<sup>1,2</sup>, Katriona Shea<sup>1</sup>, Martin Krzywinski<sup>3*</sup>, Naomi Altman<sup>4</sup>
 
@@ -49,7 +49,7 @@ Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. [Points of Significance: M
 
 ## Citation
 
-Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. Points of Significance: Adding realism to the SIR model for infectious disease epidemics (2020) *Nature Methods* **17** (in press).
+Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. Points of Significance: The SEIRS model for infectious disease dynamics (2020) *Nature Methods* **17** (in press).
 
 ## License
 

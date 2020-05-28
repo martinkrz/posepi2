@@ -1,4 +1,4 @@
-# Points of Significance - Adding realism to the SIR model for infectious disease epidemics
+# Points of Significance - The SEIRS model for infectious disease dynamics
 # Ottar Bjørnstad (1,2), Katriona Shea (1), Martin Krzywinski (3*), Naomi Altman (4)
 #
 # 1. Department of Biology, The Pennsylvania State University, State College, PA, USA.
@@ -16,7 +16,7 @@
 #
 # REMOTE ACCESS
 #
-# For the URL running the latest version of this app check the GitHub page (link above).
+# http://shiny.bcgsc.ca/posepi2
 #
 # RUN LOCALLY
 #
@@ -37,10 +37,11 @@ library(shinyWidgets)
 #
 # CHANGELOG
 #
-# 22-04-2020   spawned from posepi1
-# 04-05-2020   refactored plots and text into separate files
-# 06-05-2020   refactored LaTeX
-# 07-05-2020   refined text, added time points and SIR trajectory
+# 22-04-2020  spawned from posepi1
+# 04-05-2020  refactored plots and text into separate files
+# 06-05-2020  refactored LaTeX
+# 07-05-2020  refined text, added time points and SIR trajectory
+# 28-05-2020  first release
 
 # CUSTOM SETTINGS
 # The colors of the SEIR groups and some greys (Cn)
