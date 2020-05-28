@@ -221,8 +221,7 @@ ui = fluidPage( theme=("css/style.css"),
                                       
                                       hr(),
                                       h4("Version history"),
-                                      h5("23 May 2020 v1.0.0"),
-                                      p("Initial public release."),
+                                      HTML("<p>23 May 2020 v1.0.0 &mdash; initial public release</p>"),
                                       width=16
                                       
                                     ))

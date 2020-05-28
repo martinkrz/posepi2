@@ -60,7 +60,7 @@ plots2 = function(params1,params2) {
     
   }
   #cat(paste(lp1,id1,lp2,id2,R0,beta1))
-  param1_text = sprintf("<i>R</i><sub>0,1</sub> = %.1f, 1/<i>&beta;</i><sub>1</sub> = %.2f days, 1/<i>&gamma;</i><sub>1</sub> = %d days, 1/<i>&sigma;</i><sub>1</sub> = %d days, 1/<i>&omega;</i><sub>1</sub> = %.1f years, 1/<i>&mu;</i><sub>1</sub> = %d years and 1/<i>&alpha;</i><sub>1</sub> = %.0f days with <i>p</i><sub>1</sub> = %.0f%% of the population vaccinated",
+  param1_text = sprintf("<i>R</i><sub>0,1</sub> = %.1f, 1/<i>&beta;</i><sub>1</sub> = %.2f days, 1/<i>&gamma;</i><sub>1</sub> = %d days, 1/<i>&sigma;</i><sub>1</sub> = %d days, 1/<i>&omega;</i><sub>1</sub> = %.1f years, 1/<i>&mu;</i><sub>1</sub> = %d years and <i>&alpha;</i><sub>1</sub> = %.3f/day with <i>p</i><sub>1</sub> = %.0f%% of the population vaccinated",
                        params1$R0,
                        params1$beta,
                        params1$ip,
@@ -69,7 +69,7 @@ plots2 = function(params1,params2) {
                        params1$le/365,
                        params1$alpha,
                        params1$p*100)
-  param2_text = sprintf("<i>R</i><sub>0,2</sub> = %.1f, 1/<i>&beta;</i><sub>2</sub> = %.2f days, 1/<i>&gamma;</i><sub>2</sub> = %d days, 1/<i>&sigma;</i><sub>2</sub> = %d days, 1/<i>&omega;</i><sub>2</sub> = %.1f years, 1/<i>&mu;</i><sub>2</sub> = %d years and 1/<i>&alpha;</i><sub>2</sub> = %.0f days with <i>p</i><sub>2</sub> = %.0f%% of the population vaccinated",
+  param2_text = sprintf("<i>R</i><sub>0,2</sub> = %.1f, 1/<i>&beta;</i><sub>2</sub> = %.2f days, 1/<i>&gamma;</i><sub>2</sub> = %d days, 1/<i>&sigma;</i><sub>2</sub> = %d days, 1/<i>&omega;</i><sub>2</sub> = %.1f years, 1/<i>&mu;</i><sub>2</sub> = %d years and <i>&alpha;</i><sub>2</sub> = %.3f/day with <i>p</i><sub>2</sub> = %.0f%% of the population vaccinated",
                         params2$R0,
                         params2$beta,
                         params2$ip,

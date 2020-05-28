@@ -52,7 +52,7 @@ plots1 = function(params) { #R0,ip,lp,id,le,alpha=0,p=0) {
     plot2 = plot2 + geom_point(data=quarterly %>% filter(quarter%%4 > 0  & time > params$period & time <= params$period*n_periods),mapping=aes(x=S,y=I),colour=palette["C1"],fill="white",size=point_size_mag*plot_line_width,stroke=plot_line_width,shape=21)
   }
 
-  param_text = sprintf("<i>R</i><sub>0</sub> = %.1f, 1/<i>&beta;</i> = %.2f days, 1/<i>&gamma;</i> = %d days, 1/<i>&sigma;</i> = %d days, 1/<i>&omega;</i> = %.1f years, 1/<i>&mu;</i> = %d years and <i>&alpha;</i> = %.2f/day with %.0f%% of the population vaccinated.",
+  param_text = sprintf("<i>R</i><sub>0</sub> = %.1f, 1/<i>&beta;</i> = %.2f days, 1/<i>&gamma;</i> = %d days, 1/<i>&sigma;</i> = %d days, 1/<i>&omega;</i> = %.1f years, 1/<i>&mu;</i> = %d years and <i>&alpha;</i> = %.3f/day with %.0f%% of the population vaccinated.",
                        params$R0,
                        params$beta,
                        params$ip,
