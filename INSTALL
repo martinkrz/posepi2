@@ -1,10 +1,14 @@
 This is an R Shiny app.
 
-1. REMOTE ACCESS
+1. INTERACTIVE FIGURES
 
-https://shiny.bcgsc.ca/posepi2
+https://shiny.bcgsc.ca/posepi2/
 
-2. LOCAL EXECUTION
+2. CODE
+
+https://martinkrz.github.io/posepi2
+
+2. RUNNING LOCALLY
 
 Download R Studio from
 
@@ -16,13 +20,13 @@ shiny
 deSolve
 ggplot2
 grid
-stringr
 tidyverse
+stringr
 shinyjs
 shinyWidgets
 
-using this comment
+using 
 
-install.packages(c("shiny","deSolve","ggplot2","grid","stringr","tidyverse","shinyjs","shinyWidgets"))
+install.packages(c("shiny","deSolve","ggplot2","grid","tidyverse","stringr","shinyjs","shinyWidgets"))
 
 Finally, run the app by loading app.R in R Studio and clicking "Run App".

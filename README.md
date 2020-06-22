@@ -43,13 +43,13 @@ Run the app by loading `app.R` and cliking `Run App`.
 
 First public release.
 
-## Background reading
-
-Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. [Points of Significance: Modelling infectious epidemics](https://www.nature.com/articles/s41592-020-0822-z) (2020) *Nature Methods* **17**:455-456.
-
 ## Citation
 
-Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. Points of Significance: The SEIRS model for infectious disease dynamics (2020) *Nature Methods* **17** (in press).
+Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. [Points of Significance: The SEIRS model for infectious disease dynamics](http://www.nature.com/articles/s41592-020-0856-2) (2020) *Nature Methods* **17**:557-558. ([interactive figures](http://shiny.bcgsc.ca/posepi2), [download code](https://martinkrz.github.io/posepi2/))
+
+## Related Columns
+
+Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. [Points of Significance: Modelling infectious epidemics](https://www.nature.com/articles/s41592-020-0822-z) (2020) *Nature Methods* **17**:455-456. ([interactive figures](http://shiny.bcgsc.ca/posepi1), [download code](https://martinkrz.github.io/posepi1/))
 
 ## License
 

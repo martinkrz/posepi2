@@ -12,7 +12,7 @@
 # Points of Significance: Adding realism to the SIR model for infectious disease epidemics (2020) Nature Methods 17 (in press).
 #
 # DOWNLOAD
-# https://github.com/martinkrz/posepi2
+# https://martinkrz.github.io/posepi1
 #
 # REMOTE ACCESS
 #
@@ -25,7 +25,7 @@
 library(shiny)
 library(deSolve)
 library(ggplot2)
-library(grid)
+#library(grid)
 library(stringr)
 library(tidyverse)
 library(shinyjs)
@@ -42,6 +42,7 @@ library(shinyWidgets)
 # 06-05-2020  refactored LaTeX
 # 07-05-2020  refined text, added time points and SIR trajectory
 # 28-05-2020  first release
+# 22-06-2020  updated links
 
 # CUSTOM SETTINGS
 # The colors of the SEIR groups and some greys (Cn)
