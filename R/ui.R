@@ -214,7 +214,7 @@ ui = fluidPage( theme=("css/style.css"),
                                       
                                       hr(),
                                       h4("Citation"),
-                                      p(HTML("Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. Points of Significance: The SEIRS model for infectious disease dynamics. (2020) <i>Nature Methods</i> <b>17</b> (in press).")),
+                                      p(HTML("Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. <a href='http://www.nature.com/articles/s41592-020-0856-2'>Points of Significance: The SEIRS model for infectious disease dynamics</a>. (2020) <i>Nature Methods</i> <b>17</b>:557&ndash;558.")),
                                       
                                       h4("Background reading"),
                                       p(HTML("Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. <a href='https://www.nature.com/articles/s41592-020-0822-z'>Points of Significance: Modelling infectious epidemics.</a> (2020) <i>Nature Methods</i> <b>17</b>:455&ndash;456.")),

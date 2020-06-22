@@ -43,6 +43,10 @@ Run the app by loading `app.R` and cliking `Run App`.
 
 First public release.
 
+### v1.0.1
+
+Updated links
+
 ## Citation
 
 Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. [Points of Significance: The SEIRS model for infectious disease dynamics](http://www.nature.com/articles/s41592-020-0856-2) (2020) *Nature Methods* **17**:557-558. ([interactive figures](http://shiny.bcgsc.ca/posepi2), [download code](https://martinkrz.github.io/posepi2/))

@@ -26,6 +26,12 @@ body {
 	color: white;
 	margin-bottom:2px;
 }
+
+#mast a {
+color:           inherit;
+text-decoration: underline;
+}
+
 .mainpanel {
     padding: 0 !important;
 }
