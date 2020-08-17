@@ -1,6 +1,6 @@
 output$masthead = renderPrint({ 
   cat(paste("<div id=natmeth><img src='img/nature.methods.png'/></div>",sep=""))
-  cat(paste("<div id=mast>Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. <a href='http://www.nature.com/articles/s41592-020-0856-2'>Points of Significance: The SEIRS model for infectious disease dynamics.</a> (2020) <i>Nature Methods</i> <b>17</b>:557&ndash;558.</div>",sep=""))
+  cat(paste("<div id=mast>Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. <a href='http://www.nature.com/articles/s41592-020-0856-2'>Points of Significance: The SEIRS model for infectious disease dynamics</a>. (2020) <i>Nature Methods</i> <b>17</b>:557&ndash;558.</div>",sep=""))
 })
 
 sir_caption = function(tmax,p) {

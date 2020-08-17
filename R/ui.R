@@ -48,8 +48,8 @@ ui = fluidPage( theme=("css/style.css"),
                                         checkboxInput("log1", HTML("log<sub>10</sub> axes"), FALSE),
                                         checkboxInput("points1", HTML("show time points"), TRUE),
                                         checkboxInput("sir1",HTML("show SIR <i>I</i>(<i>t</i>) trajectory"),TRUE),
-                                        checkboxInput("text1",HTML("interpretive text"),FALSE),
-                                        checkboxInput("captions1",HTML("figure captions"),TRUE),
+                                        checkboxInput("text1",HTML("interpretive text"),interpretive_default),
+                                        checkboxInput("captions1",HTML("figure captions"),caption_default),
                                         actionButton("refresh1","Reset")
                                         )
                                       ),
@@ -153,8 +153,8 @@ ui = fluidPage( theme=("css/style.css"),
                                             checkboxInput("log2", HTML("log<sub>10</sub> axes"), TRUE),
                                             checkboxInput("points2", HTML("show time points"),   TRUE),
                                             checkboxInput("sir2",HTML("show SIR <i>I</i>(<i>t</i>) trajectory"),TRUE),
-                                            checkboxInput("text2",HTML("interpretive text"),     FALSE),
-                                            checkboxInput("captions2",HTML("figure captions"),   TRUE),
+                                            checkboxInput("text2",HTML("interpretive text"),     interpretive_default),
+                                            checkboxInput("captions2",HTML("figure captions"),   caption_default),
                                             actionButton("refresh2","Reset")
                                       )
                                       )
@@ -199,18 +199,17 @@ ui = fluidPage( theme=("css/style.css"),
                            tabPanel("Download & Credits",value=3,id=3,
                                     mainPanel(
                                       h3("Points of Significance: The SEIRS model for infectious disease dynamics"),
-                                      p(HTML("Ottar Bjørnstad<sup>1,2</sup>, Katriona Shea<sup>1</sup>, Martin Krzywinski<sup>3*</sup>, Naomi Altman<sup>4</sup>")),
+                                      p(HTML("Ottar Bjørnstad<sup>1,2</sup>, Katriona Shea<sup>1</sup>, <a href='mailto:martink@bcgsc.ca'>Martin Krzywinski</a><sup>3</sup>, Naomi Altman<sup>4</sup>")),
                                       div(
                                       p("1. Department of Biology, The Pennsylvania State University, State College, PA, USA."),
                                       p("2. Department of Entomology, The Pennsylvania State University, State College, PA, USA."),
                                       p("3. Canada’s Michael Smith Genome Sciences Center, Vancouver, British Columbia, Canada."),
                                       p("4. Department of Statistics, The Pennsylvania State University, State College, PA, USA."),
                                         class="affiliations"),
-                                      p("*",tags$a(href="mailto:martink@bcgsc.ca",tags$i("martink@bcgsc.ca"))),
 
                                       hr(),
                                       h4("Download code"),
-                                      p(tags$a(href="https://github.com/martinkrz/posepi2","https://github.com/martinkrz/posepi2")),
+                                      p(tags$a(href="https://martinkrz.github.io/posepi2/","https://martinkrz.github.io/posepi2/")),
                                       
                                       hr(),
                                       h4("Citation"),
@@ -219,9 +218,11 @@ ui = fluidPage( theme=("css/style.css"),
                                       h4("Version history"),
                                       HTML("<p>23 May 2020 v1.0.0 &mdash; initial public release</p>"),
                                       HTML("<p>22 June 2020 v1.0.1 &mdash; added links to first column</p>"),
+                                      HTML("<p>17 August 2020 v1.0.2 &mdash; added links to all columns column</p>"),
                                       hr(),
                                       h4("Related columns"),
-                                      p(HTML("Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. <a href='https://www.nature.com/articles/s41592-020-0822-z'>Points of Significance: Modelling infectious epidemics.</a> (2020) <i>Nature Methods</i> <b>17</b>:455&ndash;456.")),
+                                      p(HTML("Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. <a href='https://www.nature.com/articles/s41592-020-0822-z'>Points of Significance: Modelling infectious epidemics</a>. (2020) <i>Nature Methods</i> <b>17</b>:455&ndash;456. (<a href='http://shiny.bcgsc.ca/posepi1'>interactive figures</a>, <a href='https://martinkrz.github.io/posepi1'>download code</a>)")),
+                                      p(HTML("Shea, K., Bjørnstad, O., Krzywinski, M. & Altman, N. Points of Significance: Uncertainty and the management of epidemics. (2020) <i>Nature Methods</i> <b>17</b> (in press). (<a href='http://shiny.bcgsc.ca/posepi3'>interactive figures</a>, <a href='https://martinkrz.github.io/posepi3/'>download code</a>)")),            
                                       
                                       width=16
                                       

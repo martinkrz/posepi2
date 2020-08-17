@@ -7,16 +7,34 @@ server = function(input, output, session) {
   source("R/2.text.R",local=TRUE)
   source("R/2.plot.R",local=TRUE)
   
-  
   ### UI QOL settings
+  
+  toggleText = function(value) {
+    updateCheckboxInput(session,"text1",value=value) 
+    updateCheckboxInput(session,"text2",value=value) 
+    toggle(anim = TRUE, animType = "slide", time = 0.5, selector =".copy1", condition = value)
+    toggle(anim = TRUE, animType = "slide", time = 0.5, selector =".copy2", condition = value)
+  }
+  toggleCaptions = function(value) {
+    updateCheckboxInput(session,"captions1",value=value) 
+    updateCheckboxInput(session,"captions2",value=value) 
+    toggle(anim = TRUE, animType = "slide", time = 0.5, selector =".caption1", condition = value)
+    toggle(anim = TRUE, animType = "slide", time = 0.5, selector =".caption2", condition = value)
+  }  
+  
+  observeEvent(input$text1,     { toggleText(input$text1) })
+  observeEvent(input$text2,     { toggleText(input$text2) })
+  observeEvent(input$captions1, { toggleCaptions(input$captions1) })
+  observeEvent(input$captions2, { toggleCaptions(input$captions2) })
+  
   # reset form
   observeEvent(input$refresh1,  { shinyjs::reset("form1") })
-  observeEvent(input$text1,     { toggle(anim = TRUE, animType = "slide", time = 0.5, selector =".copy1", condition = input$text1) })
-  observeEvent(input$captions1, { toggle(anim = TRUE, animType = "slide", time = 0.5, selector =".caption1", condition = input$captions1) })
+  #observeEvent(input$text1,     { toggle(anim = TRUE, animType = "slide", time = 0.5, selector =".copy1", condition = input$text1) })
+  #observeEvent(input$captions1, { toggle(anim = TRUE, animType = "slide", time = 0.5, selector =".caption1", condition = input$captions1) })
 
   observeEvent(input$refresh2, { shinyjs::reset("form2") })
-  observeEvent(input$text2,    { toggle(anim = TRUE, animType = "slide", time = 0.5,  selector =".copy2", condition = input$text2) })
-  observeEvent(input$captions2,{ toggle(anim = TRUE, animType = "slide", time = 0.5,  selector =".caption2", condition = input$captions2) })
+  #observeEvent(input$text2,    { toggle(anim = TRUE, animType = "slide", time = 0.5,  selector =".copy2", condition = input$text2) })
+  #observeEvent(input$captions2,{ toggle(anim = TRUE, animType = "slide", time = 0.5,  selector =".caption2", condition = input$captions2) })
   
   #Make sure that vaccination slider maxes out at p_c
   #observe(updateSliderInput(session, "p1", max = floor(100*(1-1/input$R01))))
@@ -45,7 +63,6 @@ server = function(input, output, session) {
     }
   }
 
-  
   source("R/titles.R",local=TRUE)
   source("R/masthead.captions.R",local=TRUE)
   

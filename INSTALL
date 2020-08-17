@@ -19,7 +19,6 @@ Install the following packages
 shiny
 deSolve
 ggplot2
-grid
 tidyverse
 stringr
 shinyjs
@@ -27,6 +26,6 @@ shinyWidgets
 
 using 
 
-install.packages(c("shiny","deSolve","ggplot2","grid","tidyverse","stringr","shinyjs","shinyWidgets"))
+install.packages(c("shiny","deSolve","ggplot2","tidyverse","stringr","shinyjs","shinyWidgets"))
 
 Finally, run the app by loading app.R in R Studio and clicking "Run App".

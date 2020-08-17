@@ -9,10 +9,10 @@
 #
 # CITATION
 # Bjørnstad, O., Shea, K., Krzywinski, M. & Altman, N. 
-# Points of Significance: Adding realism to the SIR model for infectious disease epidemics (2020) Nature Methods 17 (in press).
+# Points of Significance: Adding realism to the SIR model for infectious disease epidemics (2020) Nature Methods 17:557–558.
 #
 # DOWNLOAD
-# https://martinkrz.github.io/posepi1
+# https://martinkrz.github.io/posepi2
 #
 # REMOTE ACCESS
 #
@@ -25,7 +25,6 @@
 library(shiny)
 library(deSolve)
 library(ggplot2)
-#library(grid)
 library(stringr)
 library(tidyverse)
 library(shinyjs)
@@ -43,6 +42,7 @@ library(shinyWidgets)
 # 07-05-2020  refined text, added time points and SIR trajectory
 # 28-05-2020  first release
 # 22-06-2020  updated links
+# 17-06-2020  updated links
 
 # CUSTOM SETTINGS
 # The colors of the SEIR groups and some greys (Cn)
@@ -95,6 +95,9 @@ al_default           = 0
 al_step              = 1
 # do timings
 do_timing            = FALSE
+
+interpretive_default = FALSE
+caption_default      = FALSE
 
 source("R/format.helpers.R",local=TRUE)
 source("R/ggplot.helpers.R",local=TRUE)
